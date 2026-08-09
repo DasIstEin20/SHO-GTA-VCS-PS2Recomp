@@ -1,0 +1,5 @@
+REVIEW-ONLY instruction window @ 0x003b1448
+Program: SLES_546.22
+
+0x003b1448  jr ra  ; flow=TERMINATOR
+0x003b144c  _move v0,zero  ; flow=FALL_THROUGH

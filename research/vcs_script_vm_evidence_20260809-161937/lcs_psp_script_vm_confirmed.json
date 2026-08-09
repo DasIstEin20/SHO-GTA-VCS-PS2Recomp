@@ -1,0 +1,256 @@
+{
+  "schema": 1,
+  "generated_at": "2026-08-09T12:56:12+00:00",
+  "status": "MANUAL_CONFIRMATION_PRESENT",
+  "confirmed": [
+    {
+      "android_anchor": {
+        "symbol": "CRunningScript::ProcessOneCommand",
+        "role": "opcode_dispatcher",
+        "address": "0x00304a14"
+      },
+      "lcs_psp": {
+        "address": "0x00153a90",
+        "name": "FUN_00153a90",
+        "namespace": "Global",
+        "size": 572,
+        "instructions": 143,
+        "basic_blocks": 39,
+        "pcode_count": 196,
+        "call_ops": 17,
+        "branch_ops": 36,
+        "cbranch_ops": 19,
+        "load_ops": 5,
+        "store_ops": 5,
+        "pcode": {
+          "COPY": 41,
+          "CBRANCH": 19,
+          "INT_EQUAL": 18,
+          "INT_SLESS": 18,
+          "INT_ZEXT": 18,
+          "BRANCH": 17,
+          "CALL": 17,
+          "INT_ADD": 15,
+          "INT_AND": 6,
+          "LOAD": 5,
+          "STORE": 5,
+          "INT_LEFT": 4,
+          "INT_2COMP": 2,
+          "INT_OR": 2,
+          "CALLOTHER": 1,
+          "INT_MULT": 1,
+          "INT_NEGATE": 1,
+          "INT_NOTEQUAL": 1,
+          "INT_RIGHT": 1,
+          "INT_SEXT": 1,
+          "INT_SRIGHT": 1,
+          "INT_SUB": 1,
+          "RETURN": 1
+        },
+        "constant_buckets": {
+          "b0": 34,
+          "b5": 28,
+          "b6": 23,
+          "b3": 8,
+          "b1": 6,
+          "b4": 5,
+          "b2": 4
+        },
+        "strings": [],
+        "callees": [
+          "0x0005eb04:FUN_0005eb04",
+          "0x000e023c:FUN_000e023c",
+          "0x000e229c:FUN_000e229c",
+          "0x00154d50:FUN_00154d50",
+          "0x00158784:FUN_00158784",
+          "0x0015b6d4:FUN_0015b6d4",
+          "0x0017888c:FUN_0017888c",
+          "0x0018db34:FUN_0018db34",
+          "0x00190874:FUN_00190874",
+          "0x001d860c:FUN_001d860c",
+          "0x001daca0:FUN_001daca0",
+          "0x001ddbd4:FUN_001ddbd4",
+          "0x001e2000:FUN_001e2000",
+          "0x00219ff0:FUN_00219ff0",
+          "0x0021c518:FUN_0021c518",
+          "0x0021de94:FUN_0021de94",
+          "0x0022d364:FUN_0022d364"
+        ]
+      },
+      "confidence": "CALLGRAPH_CONFIRMED",
+      "evidence": [
+        {
+          "kind": "EXACT_SOURCE_IDENTITY",
+          "source_symbol": "CRunningScript::ProcessOneCommand",
+          "android_anchor": "0x00304a14"
+        },
+        {
+          "kind": "CALLGRAPH_CONFIRMED",
+          "fact": "17 direct targets form contiguous opcode pages from 0–99 through 1600–1699"
+        },
+        {
+          "kind": "MULTI_SIGNAL_HIGH",
+          "fact": "reads a 16-bit opcode from script space via the running-script IP, advances IP by two, separates the high-bit not flag, then range-dispatches"
+        },
+        {
+          "kind": "MANUAL_DECOMPILATION_REVIEW",
+          "artifact": "script_vm_matcher\\artifacts\\review\\lcs_psp\\00153a90_FUN_00153a90.c",
+          "sha256": "d2bdd10a83ece1f56726c314a158fef4ea07ccefe1ed7da1ff8fe64412ef111c"
+        }
+      ],
+      "automatic_rename": false
+    }
+  ],
+  "unmatched_or_review": [
+    {
+      "symbol": "CRunningScript::CollectParameters",
+      "role": "parameter_decode",
+      "address": "0x002fb6f4"
+    },
+    {
+      "symbol": "CRunningScript::CollectNextParameterWithoutIncreasingPC",
+      "role": "parameter_decode",
+      "address": "0x002fb8b0"
+    },
+    {
+      "symbol": "CRunningScript::StoreParameters",
+      "role": "parameter_encode",
+      "address": "0x002fb9e4"
+    },
+    {
+      "symbol": "CTheScripts::Init",
+      "role": "script_loader",
+      "address": "0x002fbea4"
+    },
+    {
+      "symbol": "CTheScripts::StartNewScript",
+      "role": "script_spawn",
+      "address": "0x002fc784"
+    },
+    {
+      "symbol": "CRunningScript::ProcessCommands200To299",
+      "role": "command_partition",
+      "address": "0x002fc858"
+    },
+    {
+      "symbol": "CRunningScript::ReturnFromGosubOrFunction",
+      "role": "script_vm_support",
+      "address": "0x002fe4e4"
+    },
+    {
+      "symbol": "CRunningScript::ProcessCommands0To99",
+      "role": "command_partition",
+      "address": "0x002fe70c"
+    },
+    {
+      "symbol": "CRunningScript::ProcessCommands100To199",
+      "role": "command_partition",
+      "address": "0x00301a4c"
+    },
+    {
+      "symbol": "CRunningScript::Process",
+      "role": "running_scheduler",
+      "address": "0x00304bd4"
+    },
+    {
+      "symbol": "CTheScripts::Process",
+      "role": "global_scheduler",
+      "address": "0x00304d68"
+    },
+    {
+      "symbol": "CRunningScript::ProcessCommands300To399",
+      "role": "command_partition",
+      "address": "0x00305160"
+    },
+    {
+      "symbol": "CRunningScript::ProcessCommands400To499",
+      "role": "command_partition",
+      "address": "0x00307420"
+    },
+    {
+      "symbol": "CRunningScript::ProcessCommands600To699",
+      "role": "command_partition",
+      "address": "0x0030a0a0"
+    },
+    {
+      "symbol": "CRunningScript::ProcessCommands700To799",
+      "role": "command_partition",
+      "address": "0x0030b888"
+    },
+    {
+      "symbol": "CRunningScript::ProcessCommands500To599",
+      "role": "command_partition",
+      "address": "0x0030e940"
+    },
+    {
+      "symbol": "CRunningScript::ProcessCommands900To999",
+      "role": "command_partition",
+      "address": "0x0031180c"
+    },
+    {
+      "symbol": "CRunningScript::ProcessCommands800To899",
+      "role": "command_partition",
+      "address": "0x003144e4"
+    },
+    {
+      "symbol": "CTheScripts::ReadObjectNamesFromScript",
+      "role": "bytecode_reader",
+      "address": "0x0031e8c8"
+    },
+    {
+      "symbol": "CTheScripts::ReadMultiScriptFileOffsetsFromScript",
+      "role": "bytecode_reader",
+      "address": "0x0031eac0"
+    },
+    {
+      "symbol": "CRunningScript::ProcessCommands1100To1199",
+      "role": "command_partition",
+      "address": "0x0031ed84"
+    },
+    {
+      "symbol": "CRunningScript::ProcessCommands1000To1099",
+      "role": "command_partition",
+      "address": "0x00321ca4"
+    },
+    {
+      "symbol": "CRunningScript::ProcessCommands1200To1299",
+      "role": "command_partition",
+      "address": "0x00324118"
+    },
+    {
+      "symbol": "CRunningScript::ProcessCommands1300To1399",
+      "role": "command_partition",
+      "address": "0x00327498"
+    },
+    {
+      "symbol": "CRunningScript::ProcessCommands1400To1499",
+      "role": "command_partition",
+      "address": "0x0032a420"
+    },
+    {
+      "symbol": "CRunningScript::ProcessCommands1500To1599",
+      "role": "command_partition",
+      "address": "0x0032d398"
+    },
+    {
+      "symbol": "CRunningScript::ProcessCommands1600To1699",
+      "role": "command_partition",
+      "address": "0x00330490"
+    }
+  ],
+  "policy": {
+    "automatic_rename": [
+      "EXACT_SYMBOL",
+      "NORMALIZED_MIPS_EXACT + independent semantic anchor",
+      "BINDIFF_HIGH + CALLGRAPH_CONFIRMED"
+    ],
+    "never_automatic": [
+      "p-code histogram similarity",
+      "CFG/size similarity",
+      "constant-bucket similarity",
+      "role affinity",
+      "a fuzzy score alone"
+    ],
+    "chain": "reLCS source -> LCS Android exact C++ symbols -> LCS PSP MIPS -> VCS PSP MIPS"
+  }
+}

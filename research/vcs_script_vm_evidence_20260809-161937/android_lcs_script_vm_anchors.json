@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "provenance": {
+    "feed": "VCS_Codex_Symbol_Research_Feed_20260809/CODEX_PROMPT.md",
+    "binary_sha256": "c46507f92e1e02bc7e79f476aba02fa731682fc5ca3c320624fa8a99e854adb1",
+    "policy": "Every entry must agree on address, namespace and C++ symbol in the Android Ghidra export."
+  },
+  "anchors": [
+    {"address": "0x002fb6f4", "symbol": "CRunningScript::CollectParameters"},
+    {"address": "0x002fb8b0", "symbol": "CRunningScript::CollectNextParameterWithoutIncreasingPC"},
+    {"address": "0x002fb9e4", "symbol": "CRunningScript::StoreParameters"},
+    {"address": "0x002fbea4", "symbol": "CTheScripts::Init"},
+    {"address": "0x002fc784", "symbol": "CTheScripts::StartNewScript"},
+    {"address": "0x002fc858", "symbol": "CRunningScript::ProcessCommands200To299"},
+    {"address": "0x002fe4e4", "symbol": "CRunningScript::ReturnFromGosubOrFunction"},
+    {"address": "0x002fe70c", "symbol": "CRunningScript::ProcessCommands0To99"},
+    {"address": "0x00301a4c", "symbol": "CRunningScript::ProcessCommands100To199"},
+    {"address": "0x00304a14", "symbol": "CRunningScript::ProcessOneCommand"},
+    {"address": "0x00304bd4", "symbol": "CRunningScript::Process"},
+    {"address": "0x00304d68", "symbol": "CTheScripts::Process"},
+    {"address": "0x00305160", "symbol": "CRunningScript::ProcessCommands300To399"},
+    {"address": "0x00307420", "symbol": "CRunningScript::ProcessCommands400To499"},
+    {"address": "0x0030a0a0", "symbol": "CRunningScript::ProcessCommands600To699"},
+    {"address": "0x0030b888", "symbol": "CRunningScript::ProcessCommands700To799"},
+    {"address": "0x0030e940", "symbol": "CRunningScript::ProcessCommands500To599"},
+    {"address": "0x0031180c", "symbol": "CRunningScript::ProcessCommands900To999"},
+    {"address": "0x003144e4", "symbol": "CRunningScript::ProcessCommands800To899"},
+    {"address": "0x0031e8c8", "symbol": "CTheScripts::ReadObjectNamesFromScript"},
+    {"address": "0x0031eac0", "symbol": "CTheScripts::ReadMultiScriptFileOffsetsFromScript"},
+    {"address": "0x0031ed84", "symbol": "CRunningScript::ProcessCommands1100To1199"},
+    {"address": "0x00321ca4", "symbol": "CRunningScript::ProcessCommands1000To1099"},
+    {"address": "0x00324118", "symbol": "CRunningScript::ProcessCommands1200To1299"},
+    {"address": "0x00327498", "symbol": "CRunningScript::ProcessCommands1300To1399"},
+    {"address": "0x0032a420", "symbol": "CRunningScript::ProcessCommands1400To1499"},
+    {"address": "0x0032d398", "symbol": "CRunningScript::ProcessCommands1500To1599"},
+    {"address": "0x00330490", "symbol": "CRunningScript::ProcessCommands1600To1699"}
+  ]
+}

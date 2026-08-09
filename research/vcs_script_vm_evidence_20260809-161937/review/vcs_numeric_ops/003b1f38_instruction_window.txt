@@ -1,0 +1,16 @@
+REVIEW-ONLY instruction window @ 0x003b1f38
+Program: SLES_546.22
+
+0x003b1f38  addiu sp,sp,-0x10  ; flow=FALL_THROUGH
+0x003b1f3c  move a2,zero  ; flow=FALL_THROUGH
+0x003b1f40  sd ra,0x0(sp)  ; flow=FALL_THROUGH
+0x003b1f44  jal 0x002552f0  ; flow=UNCONDITIONAL_CALL
+0x003b1f48  _addiu a1,a0,0x10  ; flow=FALL_THROUGH
+0x003b1f4c  move v1,v0  ; flow=FALL_THROUGH
+0x003b1f50  ld ra,0x0(sp)  ; flow=FALL_THROUGH
+0x003b1f54  lwc1 f0,0x0(v1)  ; flow=FALL_THROUGH
+0x003b1f58  move v0,zero  ; flow=FALL_THROUGH
+0x003b1f5c  abs.S f0,f0  ; flow=FALL_THROUGH
+0x003b1f60  swc1 f0,0x0(v1)  ; flow=FALL_THROUGH
+0x003b1f64  jr ra  ; flow=TERMINATOR
+0x003b1f68  _addiu sp,sp,0x10  ; flow=FALL_THROUGH

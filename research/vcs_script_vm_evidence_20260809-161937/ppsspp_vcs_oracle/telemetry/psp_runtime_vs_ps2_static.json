@@ -1,0 +1,1037 @@
+{
+  "schema": 2,
+  "purpose": "PSP runtime oracle observations paired with existing VCS PS2 static evidence; native handler status is interpreter control flow, not an SCM output; no automatic equivalence assertion.",
+  "runtime_capture_summary": {
+    "initial_proof_opcodes": [
+      "0x0000",
+      "0x0001",
+      "0x0002",
+      "0x037A",
+      "0x037B",
+      "0x055A"
+    ],
+    "captured_opcodes": [
+      "0x0001",
+      "0x0002",
+      "0x037A",
+      "0x037B",
+      "0x055A"
+    ],
+    "awaiting_natural_execution": [
+      "0x0000"
+    ],
+    "successful_capture_count": 5,
+    "status": "PARTIAL"
+  },
+  "runtime_telemetry": "R:\\Codex-workspace-misc\\gta-vcs\\tools\\ppsspp_vcs_oracle\\telemetry",
+  "ps2_table": "R:\\Codex-workspace-misc\\gta-vcs\\VCS_PS2_HANDLER_DB.json",
+  "manual_proof": "R:\\Codex-workspace-misc\\gta-vcs\\VCS_PSP_PS2_MANUAL_SEMANTIC_PROOF.json",
+  "canonical_semantics": "R:\\Codex-workspace-misc\\gta-vcs\\VCS_PSP_INITIAL_OPCODE_CANONICAL_SEMANTICS.json",
+  "rows": [
+    {
+      "opcode": "0x0000",
+      "name": "NOP",
+      "psp_runtime": null,
+      "psp_vm_dispatch_status": null,
+      "ps2_static_handler": "0x003b1448",
+      "ps2_static_manual_finding": "Both handlers are exactly `jr ra` with delay-slot `v0 = 0`. This is native VM dispatch status `CONTINUE`, not a script-level output; neither handler reads a parameter nor mutates thread state.",
+      "status": "AWAITING_RUNTIME_CAPTURE"
+    },
+    {
+      "opcode": "0x0001",
+      "name": "WAIT",
+      "psp_runtime": {
+        "assertions": {
+          "dispatcher_ip_write_observed": true,
+          "handler_match": true,
+          "opcode_match": true,
+          "return_match": true
+        },
+        "captured_at": "2026-08-09T02:55:46.822269Z",
+        "ppsspp": {
+          "game": {
+            "event": "game.status",
+            "game": {
+              "id": "ULES00502",
+              "title": "Grand Theft Auto: Vice City Stories",
+              "version": "1.02"
+            },
+            "paused": false,
+            "ticket": "oracle-2"
+          },
+          "version": {
+            "event": "version",
+            "name": "PPSSPP",
+            "ticket": "oracle-1",
+            "version": "v1.20.4"
+          }
+        },
+        "proof_case": {
+          "expected_return": 1,
+          "name": "WAIT",
+          "opcode": "0x0001",
+          "static_expected_thread_fields": [
+            "wake_time",
+            "wait_flag"
+          ]
+        },
+        "runtime": {
+          "dispatch_record": {
+            "address": "0x08B84AB8",
+            "descriptor": "0x00000000",
+            "handler": "0x08A9E5A8",
+            "handler_rva": "0x0029A5A8"
+          },
+          "dispatcher": "0x088625E8",
+          "dispatcher_to_handler_thread_diff": {
+            "changed": true,
+            "changed_field_offsets": [
+              "0x10"
+            ],
+            "fields": [
+              {
+                "address": "0x08BEDB48",
+                "after": "0x00030560",
+                "before": "0x0003055E",
+                "name": "script_ip",
+                "offset": "0x10",
+                "size": 4
+              }
+            ],
+            "ranges": [
+              {
+                "address": "0x08BEDB48",
+                "after": "60",
+                "before": "5e",
+                "offset": "0x10"
+              }
+            ]
+          },
+          "dispatches_skipped_before_hit": 0,
+          "handler_return_site": "0x088626A4",
+          "input_parameter_bytes": "0732020006fb0603004500d00e220006f006030004003d0701350027d858",
+          "ip_after": "0x00030562",
+          "ip_before": "0x0003055E",
+          "load_base": "0x08804000",
+          "not_bit_set": false,
+          "opcode": "0x0001",
+          "opcode_bytes": "0100",
+          "opcode_ready_breakpoint": {
+            "address": "0x08862608",
+            "condition": "(a1 & 0x7fff) == 0x0001",
+            "opcode_register": "a1"
+          },
+          "raw_opcode": "0x0001",
+          "relevant_memory_changes": [],
+          "return_value_v0": 1,
+          "script_bytecode_base": "0x09F68400",
+          "script_thread": "0x08BEDB38",
+          "script_thread_diff": {
+            "changed": true,
+            "changed_field_offsets": [
+              "0x10",
+              "0x200"
+            ],
+            "fields": [
+              {
+                "address": "0x08BEDB48",
+                "after": "0x00030562",
+                "before": "0x0003055E",
+                "name": "script_ip",
+                "offset": "0x10",
+                "size": 4
+              },
+              {
+                "address": "0x08BEDD38",
+                "after": "0x0002BEC5",
+                "before": "0x0002BE72",
+                "name": "wake_time",
+                "offset": "0x200",
+                "size": 4
+              }
+            ],
+            "ranges": [
+              {
+                "address": "0x08BEDB48",
+                "after": "62",
+                "before": "5e",
+                "offset": "0x10"
+              },
+              {
+                "address": "0x08BEDD38",
+                "after": "c5",
+                "before": "72",
+                "offset": "0x200"
+              }
+            ]
+          },
+          "script_thread_write_tracepoints": [
+            {
+              "address": "0x08BEDB48",
+              "field": "ip",
+              "kind": "PPSSPP memory.breakpoint.add(write=true, enabled=false, log=false)",
+              "size": 4,
+              "write_hits": 1,
+              "write_observed": true
+            },
+            {
+              "address": "0x08BEDD44",
+              "field": "not_flag",
+              "kind": "PPSSPP memory.breakpoint.add(write=true, enabled=false, log=false)",
+              "size": 1,
+              "write_hits": 0,
+              "write_observed": false
+            },
+            {
+              "address": "0x08BEDD38",
+              "field": "wake_time",
+              "kind": "PPSSPP memory.breakpoint.add(write=true, enabled=false, log=false)",
+              "size": 4,
+              "write_hits": 0,
+              "write_observed": false
+            },
+            {
+              "address": "0x08BEDD43",
+              "field": "wait_flag",
+              "kind": "PPSSPP memory.breakpoint.add(write=true, enabled=false, log=false)",
+              "size": 1,
+              "write_hits": 0,
+              "write_observed": false
+            }
+          ]
+        },
+        "schema": "ppsspp-vcs-oracle/capture-v1",
+        "source": {
+          "execution": "natural game execution; no game memory patching or script injection",
+          "transport": "PPSSPP debugger WebSocket"
+        }
+      },
+      "psp_vm_dispatch_status": {
+        "register": "v0",
+        "value": 1,
+        "process_action": "STOP_CURRENT_PROCESS_PASS",
+        "script_flow": "YIELD",
+        "definition": "Interpreter ABI status, not a script-command output.",
+        "source_capture_schema": "ppsspp-vcs-oracle/capture-v1"
+      },
+      "ps2_static_handler": "0x003909d0",
+      "ps2_static_manual_finding": "PS2 reads one script parameter, clears thread+0x20b, stores a derived wake value at thread+0x200 and reports native VM dispatch status 1 (`YIELD`). PSP enters its corresponding table target with the same one-parameter decoder setup, but its continuation lies outside the recovered PSP function boundary; no cross-platform semantic equality is claimed yet.",
+      "status": "RUNTIME_CAPTURED_AND_STATIC_CONTEXT_PRESENT"
+    },
+    {
+      "opcode": "0x0002",
+      "name": "GOTO",
+      "psp_runtime": {
+        "assertions": {
+          "dispatcher_ip_write_observed": true,
+          "handler_match": true,
+          "opcode_match": true,
+          "return_match": true
+        },
+        "captured_at": "2026-08-09T02:55:58.834993Z",
+        "ppsspp": {
+          "game": {
+            "event": "game.status",
+            "game": {
+              "id": "ULES00502",
+              "title": "Grand Theft Auto: Vice City Stories",
+              "version": "1.02"
+            },
+            "paused": false,
+            "ticket": "oracle-2"
+          },
+          "version": {
+            "event": "version",
+            "name": "PPSSPP",
+            "ticket": "oracle-1",
+            "version": "v1.20.4"
+          }
+        },
+        "proof_case": {
+          "expected_return": 0,
+          "name": "GOTO",
+          "opcode": "0x0002",
+          "static_expected_thread_fields": [
+            "ip"
+          ]
+        },
+        "runtime": {
+          "dispatch_record": {
+            "address": "0x08B84AC0",
+            "descriptor": "0x00000000",
+            "handler": "0x08ABB3E8",
+            "handler_rva": "0x002B73E8"
+          },
+          "dispatcher": "0x088625E8",
+          "dispatcher_to_handler_thread_diff": {
+            "changed": true,
+            "changed_field_offsets": [
+              "0x10"
+            ],
+            "fields": [
+              {
+                "address": "0x08BF15E8",
+                "after": "0x0002F32A",
+                "before": "0x0002F328",
+                "name": "script_ip",
+                "offset": "0x10",
+                "size": 4
+              }
+            ],
+            "ranges": [
+              {
+                "address": "0x08BF15E8",
+                "after": "2a",
+                "before": "28",
+                "offset": "0x10"
+              }
+            ]
+          },
+          "dispatches_skipped_before_hit": 0,
+          "handler_return_site": "0x088626A4",
+          "input_parameter_bytes": "06c5f2020024000687f60200d51e002600db020d070522000659f3020038",
+          "ip_after": "0x0002F2C5",
+          "ip_before": "0x0002F328",
+          "load_base": "0x08804000",
+          "not_bit_set": false,
+          "opcode": "0x0002",
+          "opcode_bytes": "0200",
+          "opcode_ready_breakpoint": {
+            "address": "0x08862608",
+            "condition": "(a1 & 0x7fff) == 0x0002",
+            "opcode_register": "a1"
+          },
+          "raw_opcode": "0x0002",
+          "relevant_memory_changes": [],
+          "return_value_v0": 0,
+          "script_bytecode_base": "0x09F68400",
+          "script_thread": "0x08BF15D8",
+          "script_thread_diff": {
+            "changed": true,
+            "changed_field_offsets": [
+              "0x10"
+            ],
+            "fields": [
+              {
+                "address": "0x08BF15E8",
+                "after": "0x0002F2C5",
+                "before": "0x0002F328",
+                "name": "script_ip",
+                "offset": "0x10",
+                "size": 4
+              }
+            ],
+            "ranges": [
+              {
+                "address": "0x08BF15E8",
+                "after": "c5f2",
+                "before": "28f3",
+                "offset": "0x10"
+              }
+            ]
+          },
+          "script_thread_write_tracepoints": [
+            {
+              "address": "0x08BF15E8",
+              "field": "ip",
+              "kind": "PPSSPP memory.breakpoint.add(write=true, enabled=false, log=false)",
+              "size": 4,
+              "write_hits": 1,
+              "write_observed": true
+            },
+            {
+              "address": "0x08BF17E4",
+              "field": "not_flag",
+              "kind": "PPSSPP memory.breakpoint.add(write=true, enabled=false, log=false)",
+              "size": 1,
+              "write_hits": 0,
+              "write_observed": false
+            }
+          ]
+        },
+        "schema": "ppsspp-vcs-oracle/capture-v1",
+        "source": {
+          "execution": "natural game execution; no game memory patching or script injection",
+          "transport": "PPSSPP debugger WebSocket"
+        }
+      },
+      "psp_vm_dispatch_status": {
+        "register": "v0",
+        "value": 0,
+        "process_action": "CONTINUE",
+        "script_flow": "CONTINUE",
+        "definition": "Interpreter ABI status, not a script-command output.",
+        "source_capture_schema": "ppsspp-vcs-oracle/capture-v1"
+      },
+      "ps2_static_handler": "0x003b1450",
+      "ps2_static_manual_finding": "PS2 reads one script parameter and writes the resulting script position to thread+0x10 before reporting native VM dispatch status 0 (`CONTINUE`). PSP reaches the analogous table target with the same one-parameter decoder setup, but its continuation is outside the recovered PSP function boundary; no cross-platform semantic equality is claimed yet.",
+      "status": "RUNTIME_CAPTURED_AND_STATIC_CONTEXT_PRESENT"
+    },
+    {
+      "opcode": "0x037A",
+      "name": "CALL_NOT",
+      "psp_runtime": {
+        "assertions": {
+          "dispatcher_ip_write_observed": true,
+          "handler_match": true,
+          "opcode_match": true,
+          "return_match": true
+        },
+        "captured_at": "2026-08-09T02:56:30.800967Z",
+        "ppsspp": {
+          "game": {
+            "event": "game.status",
+            "game": {
+              "id": "ULES00502",
+              "title": "Grand Theft Auto: Vice City Stories",
+              "version": "1.02"
+            },
+            "paused": false,
+            "ticket": "oracle-2"
+          },
+          "version": {
+            "event": "version",
+            "name": "PPSSPP",
+            "ticket": "oracle-1",
+            "version": "v1.20.4"
+          }
+        },
+        "proof_case": {
+          "expected_return": 0,
+          "name": "CALL_NOT",
+          "opcode": "0x037A",
+          "static_expected_thread_fields": [
+            "call_frame_data",
+            "call_stack_depth"
+          ]
+        },
+        "runtime": {
+          "dispatch_record": {
+            "address": "0x08B86680",
+            "descriptor": "0x00000000",
+            "handler": "0x08ABC714",
+            "handler_rva": "0x002B8714"
+          },
+          "dispatcher": "0x088625E8",
+          "dispatcher_to_handler_thread_diff": {
+            "changed": true,
+            "changed_field_offsets": [
+              "0x10"
+            ],
+            "fields": [
+              {
+                "address": "0x08BF1800",
+                "after": "0x00035495",
+                "before": "0x00035493",
+                "name": "script_ip",
+                "offset": "0x10",
+                "size": 4
+              }
+            ],
+            "ranges": [
+              {
+                "address": "0x08BF1800",
+                "after": "95",
+                "before": "93",
+                "offset": "0x10"
+              }
+            ]
+          },
+          "dispatches_skipped_before_hit": 0,
+          "handler_return_site": "0x088626A4",
+          "input_parameter_bytes": "000000067d530300220006a65403005e005f009c00010400e08207011b00",
+          "ip_after": "0x0003537D",
+          "ip_before": "0x00035493",
+          "load_base": "0x08804000",
+          "not_bit_set": false,
+          "opcode": "0x037A",
+          "opcode_bytes": "7a03",
+          "opcode_ready_breakpoint": {
+            "address": "0x08862608",
+            "condition": "(a1 & 0x7fff) == 0x037a",
+            "opcode_register": "a1"
+          },
+          "raw_opcode": "0x037A",
+          "relevant_memory_changes": [],
+          "return_value_v0": 0,
+          "script_bytecode_base": "0x09F68400",
+          "script_thread": "0x08BF17F0",
+          "script_thread_diff": {
+            "changed": true,
+            "changed_field_offsets": [
+              "0x10",
+              "0x204"
+            ],
+            "fields": [
+              {
+                "address": "0x08BF1800",
+                "after": "0x0003537D",
+                "before": "0x00035493",
+                "name": "script_ip",
+                "offset": "0x10",
+                "size": 4
+              },
+              {
+                "address": "0x08BF19F4",
+                "after": "0x0003",
+                "before": "0x0002",
+                "name": "call_stack_depth",
+                "offset": "0x204",
+                "size": 2
+              }
+            ],
+            "ranges": [
+              {
+                "address": "0x08BF1800",
+                "after": "7d53",
+                "before": "9354",
+                "offset": "0x10"
+              },
+              {
+                "address": "0x08BF19F4",
+                "after": "03",
+                "before": "02",
+                "offset": "0x204"
+              }
+            ]
+          },
+          "script_thread_write_tracepoints": [
+            {
+              "address": "0x08BF1800",
+              "field": "ip",
+              "kind": "PPSSPP memory.breakpoint.add(write=true, enabled=false, log=false)",
+              "size": 4,
+              "write_hits": 1,
+              "write_observed": true
+            },
+            {
+              "address": "0x08BF19FC",
+              "field": "not_flag",
+              "kind": "PPSSPP memory.breakpoint.add(write=true, enabled=false, log=false)",
+              "size": 1,
+              "write_hits": 0,
+              "write_observed": false
+            },
+            {
+              "address": "0x08BF19EC",
+              "field": "call_frame_data",
+              "kind": "PPSSPP memory.breakpoint.add(write=true, enabled=false, log=false)",
+              "size": 4,
+              "write_hits": 0,
+              "write_observed": false
+            },
+            {
+              "address": "0x08BF19F4",
+              "field": "call_stack_depth",
+              "kind": "PPSSPP memory.breakpoint.add(write=true, enabled=false, log=false)",
+              "size": 2,
+              "write_hits": 0,
+              "write_observed": false
+            }
+          ]
+        },
+        "schema": "ppsspp-vcs-oracle/capture-v1",
+        "source": {
+          "execution": "natural game execution; no game memory patching or script injection",
+          "transport": "PPSSPP debugger WebSocket"
+        }
+      },
+      "psp_vm_dispatch_status": {
+        "register": "v0",
+        "value": 0,
+        "process_action": "CONTINUE",
+        "script_flow": "CONTINUE",
+        "definition": "Interpreter ABI status, not a script-command output.",
+        "source_capture_schema": "ppsspp-vcs-oracle/capture-v1"
+      },
+      "ps2_static_handler": "0x003b2810",
+      "ps2_static_manual_finding": "Both platforms enter the common CALL handler, compare the preserved opcode with 0x037B, push a thread+0x204 call-frame entry, consume call metadata/arguments and report native VM dispatch status 0 (`CONTINUE`). The non-0x037B branch uses the CALL_NOT frame tag (0x00c00000).",
+      "status": "RUNTIME_CAPTURED_AND_STATIC_CONTEXT_PRESENT"
+    },
+    {
+      "opcode": "0x037B",
+      "name": "CALL",
+      "psp_runtime": {
+        "assertions": {
+          "dispatcher_ip_write_observed": true,
+          "handler_match": true,
+          "opcode_match": true,
+          "return_match": true
+        },
+        "captured_at": "2026-08-09T02:56:17.687817Z",
+        "ppsspp": {
+          "game": {
+            "event": "game.status",
+            "game": {
+              "id": "ULES00502",
+              "title": "Grand Theft Auto: Vice City Stories",
+              "version": "1.02"
+            },
+            "paused": false,
+            "ticket": "oracle-2"
+          },
+          "version": {
+            "event": "version",
+            "name": "PPSSPP",
+            "ticket": "oracle-1",
+            "version": "v1.20.4"
+          }
+        },
+        "proof_case": {
+          "expected_return": 0,
+          "name": "CALL",
+          "opcode": "0x037B",
+          "static_expected_thread_fields": [
+            "call_frame_data",
+            "call_stack_depth"
+          ]
+        },
+        "runtime": {
+          "dispatch_record": {
+            "address": "0x08B86688",
+            "descriptor": "0x00000000",
+            "handler": "0x08ABC714",
+            "handler_rva": "0x002B8714"
+          },
+          "dispatcher": "0x088625E8",
+          "dispatcher_to_handler_thread_diff": {
+            "changed": true,
+            "changed_field_offsets": [
+              "0x10"
+            ],
+            "fields": [
+              {
+                "address": "0x08BF00F8",
+                "after": "0x0002AE6E",
+                "before": "0x0002AE6C",
+                "name": "script_ip",
+                "offset": "0x10",
+                "size": 4
+              }
+            ],
+            "ranges": [
+              {
+                "address": "0x08BF00F8",
+                "after": "6e",
+                "before": "6c",
+                "offset": "0x10"
+              }
+            ]
+          },
+          "dispatches_skipped_before_hit": 0,
+          "handler_return_site": "0x088626A4",
+          "input_parameter_bytes": "020000063da6020008e20008b70022000601af02007b030200000659a902",
+          "ip_after": "0x0002A63D",
+          "ip_before": "0x0002AE6C",
+          "load_base": "0x08804000",
+          "not_bit_set": false,
+          "opcode": "0x037B",
+          "opcode_bytes": "7b03",
+          "opcode_ready_breakpoint": {
+            "address": "0x08862608",
+            "condition": "(a1 & 0x7fff) == 0x037b",
+            "opcode_register": "a1"
+          },
+          "raw_opcode": "0x037B",
+          "relevant_memory_changes": [],
+          "return_value_v0": 0,
+          "script_bytecode_base": "0x09F68400",
+          "script_thread": "0x08BF00E8",
+          "script_thread_diff": {
+            "changed": true,
+            "changed_field_offsets": [
+              "0x10",
+              "0x14",
+              "0x204"
+            ],
+            "fields": [
+              {
+                "address": "0x08BF00F8",
+                "after": "0x0002A63D",
+                "before": "0x0002AE6C",
+                "name": "script_ip",
+                "offset": "0x10",
+                "size": 4
+              },
+              {
+                "address": "0x08BF00FC",
+                "after": "0x0B82AE6E",
+                "before": "0x0F82AF03",
+                "name": "saved_script_ip",
+                "offset": "0x14",
+                "size": 4
+              },
+              {
+                "address": "0x08BF02EC",
+                "after": "0x0001",
+                "before": "0x0000",
+                "name": "call_stack_depth",
+                "offset": "0x204",
+                "size": 2
+              }
+            ],
+            "ranges": [
+              {
+                "address": "0x08BF00F8",
+                "after": "3da6",
+                "before": "6cae",
+                "offset": "0x10"
+              },
+              {
+                "address": "0x08BF00FC",
+                "after": "6eae",
+                "before": "03af",
+                "offset": "0x14"
+              },
+              {
+                "address": "0x08BF00FF",
+                "after": "0b",
+                "before": "0f",
+                "offset": "0x17"
+              },
+              {
+                "address": "0x08BF013C",
+                "after": "e20000",
+                "before": "0caf02",
+                "offset": "0x54"
+              },
+              {
+                "address": "0x08BF0140",
+                "after": "b7",
+                "before": "00",
+                "offset": "0x58"
+              },
+              {
+                "address": "0x08BF02EC",
+                "after": "01",
+                "before": "00",
+                "offset": "0x204"
+              }
+            ]
+          },
+          "script_thread_write_tracepoints": [
+            {
+              "address": "0x08BF00F8",
+              "field": "ip",
+              "kind": "PPSSPP memory.breakpoint.add(write=true, enabled=false, log=false)",
+              "size": 4,
+              "write_hits": 1,
+              "write_observed": true
+            },
+            {
+              "address": "0x08BF02F4",
+              "field": "not_flag",
+              "kind": "PPSSPP memory.breakpoint.add(write=true, enabled=false, log=false)",
+              "size": 1,
+              "write_hits": 0,
+              "write_observed": false
+            },
+            {
+              "address": "0x08BF02E4",
+              "field": "call_frame_data",
+              "kind": "PPSSPP memory.breakpoint.add(write=true, enabled=false, log=false)",
+              "size": 4,
+              "write_hits": 0,
+              "write_observed": false
+            },
+            {
+              "address": "0x08BF02EC",
+              "field": "call_stack_depth",
+              "kind": "PPSSPP memory.breakpoint.add(write=true, enabled=false, log=false)",
+              "size": 2,
+              "write_hits": 0,
+              "write_observed": false
+            }
+          ]
+        },
+        "schema": "ppsspp-vcs-oracle/capture-v1",
+        "source": {
+          "execution": "natural game execution; no game memory patching or script injection",
+          "transport": "PPSSPP debugger WebSocket"
+        }
+      },
+      "psp_vm_dispatch_status": {
+        "register": "v0",
+        "value": 0,
+        "process_action": "CONTINUE",
+        "script_flow": "CONTINUE",
+        "definition": "Interpreter ABI status, not a script-command output.",
+        "source_capture_schema": "ppsspp-vcs-oracle/capture-v1"
+      },
+      "ps2_static_handler": "0x003b2810",
+      "ps2_static_manual_finding": "Both platforms use the same handler as 0x037A, but the `opcode == 0x037B` branch writes the distinct CALL frame tag (0x00800000) before collecting call metadata/arguments and reports native VM dispatch status 0 (`CONTINUE`). This proves the shared target is not an accidental table alias.",
+      "status": "RUNTIME_CAPTURED_AND_STATIC_CONTEXT_PRESENT"
+    },
+    {
+      "opcode": "0x055A",
+      "name": "COMMAND_055A",
+      "psp_runtime": {
+        "assertions": {
+          "dispatcher_ip_write_observed": true,
+          "handler_match": true,
+          "opcode_match": true,
+          "return_match": true
+        },
+        "captured_at": "2026-08-09T02:56:43.579905Z",
+        "ppsspp": {
+          "game": {
+            "event": "game.status",
+            "game": {
+              "id": "ULES00502",
+              "title": "Grand Theft Auto: Vice City Stories",
+              "version": "1.02"
+            },
+            "paused": false,
+            "ticket": "oracle-2"
+          },
+          "version": {
+            "event": "version",
+            "name": "PPSSPP",
+            "ticket": "oracle-1",
+            "version": "v1.20.4"
+          }
+        },
+        "proof_case": {
+          "expected_return": 0,
+          "name": "OPCODE_055A",
+          "opcode": "0x055A",
+          "static_expected_thread_fields": [
+            "condition_state",
+            "condition_result"
+          ]
+        },
+        "runtime": {
+          "dispatch_record": {
+            "address": "0x08B87580",
+            "descriptor": "0x00000000",
+            "handler": "0x088A24C8",
+            "handler_rva": "0x0009E4C8"
+          },
+          "dispatcher": "0x088625E8",
+          "dispatcher_to_handler_thread_diff": {
+            "changed": true,
+            "changed_field_offsets": [
+              "0x10"
+            ],
+            "fields": [
+              {
+                "address": "0x08BEDB48",
+                "after": "0x00030557",
+                "before": "0x00030555",
+                "name": "script_ip",
+                "offset": "0x10",
+                "size": 4
+              }
+            ],
+            "ranges": [
+              {
+                "address": "0x08BEDB48",
+                "after": "57",
+                "before": "55",
+                "offset": "0x10"
+              }
+            ]
+          },
+          "dispatches_skipped_before_hit": 0,
+          "handler_return_site": "0x088626A4",
+          "input_parameter_bytes": "2200066905030001000732020006fb0603004500d00e220006f006030004",
+          "ip_after": "0x00030557",
+          "ip_before": "0x00030555",
+          "load_base": "0x08804000",
+          "not_bit_set": false,
+          "opcode": "0x055A",
+          "opcode_bytes": "5a05",
+          "opcode_ready_breakpoint": {
+            "address": "0x08862608",
+            "condition": "(a1 & 0x7fff) == 0x055a",
+            "opcode_register": "a1"
+          },
+          "raw_opcode": "0x055A",
+          "relevant_memory_changes": [],
+          "return_value_v0": 0,
+          "script_bytecode_base": "0x09F68400",
+          "script_thread": "0x08BEDB38",
+          "script_thread_diff": {
+            "changed": true,
+            "changed_field_offsets": [
+              "0x10",
+              "0x206"
+            ],
+            "fields": [
+              {
+                "address": "0x08BEDB48",
+                "after": "0x00030557",
+                "before": "0x00030555",
+                "name": "script_ip",
+                "offset": "0x10",
+                "size": 4
+              },
+              {
+                "address": "0x08BEDD3E",
+                "after": "0x0000",
+                "before": "0x0015",
+                "name": "condition_state",
+                "offset": "0x206",
+                "size": 2
+              }
+            ],
+            "ranges": [
+              {
+                "address": "0x08BEDB48",
+                "after": "57",
+                "before": "55",
+                "offset": "0x10"
+              },
+              {
+                "address": "0x08BEDD3E",
+                "after": "00",
+                "before": "15",
+                "offset": "0x206"
+              }
+            ]
+          },
+          "script_thread_write_tracepoints": [
+            {
+              "address": "0x08BEDB48",
+              "field": "ip",
+              "kind": "PPSSPP memory.breakpoint.add(write=true, enabled=false, log=false)",
+              "size": 4,
+              "write_hits": 1,
+              "write_observed": true
+            },
+            {
+              "address": "0x08BEDD44",
+              "field": "not_flag",
+              "kind": "PPSSPP memory.breakpoint.add(write=true, enabled=false, log=false)",
+              "size": 1,
+              "write_hits": 0,
+              "write_observed": false
+            },
+            {
+              "address": "0x08BEDD3E",
+              "field": "condition_state",
+              "kind": "PPSSPP memory.breakpoint.add(write=true, enabled=false, log=false)",
+              "size": 2,
+              "write_hits": 0,
+              "write_observed": false
+            },
+            {
+              "address": "0x08BEDD41",
+              "field": "condition_result",
+              "kind": "PPSSPP memory.breakpoint.add(write=true, enabled=false, log=false)",
+              "size": 1,
+              "write_hits": 0,
+              "write_observed": false
+            }
+          ]
+        },
+        "schema": "ppsspp-vcs-oracle/capture-v1",
+        "source": {
+          "execution": "natural game execution; no game memory patching or script injection",
+          "transport": "PPSSPP debugger WebSocket"
+        }
+      },
+      "psp_vm_dispatch_status": {
+        "register": "v0",
+        "value": 0,
+        "process_action": "CONTINUE",
+        "script_flow": "CONTINUE",
+        "definition": "Interpreter ABI status, not a script-command output.",
+        "source_capture_schema": "ppsspp-vcs-oracle/capture-v1"
+      },
+      "ps2_static_handler": "0x0012c1e0",
+      "ps2_static_manual_finding": "Both zero-parameter handlers reduce/update Script VM condition state: they read thread+0x20c, thread+0x206 and thread+0x209, write the aggregate state, clear thread+0x206 at the terminal condition and report native VM dispatch status 0 (`CONTINUE`). The public opcode list provides no semantic name, so a generic name is retained.",
+      "status": "RUNTIME_CAPTURED_AND_STATIC_CONTEXT_PRESENT"
+    },
+    {
+      "opcode": "0x055B",
+      "name": "COMMAND_055B",
+      "psp_runtime": null,
+      "psp_vm_dispatch_status": null,
+      "ps2_static_handler": "0x00186330",
+      "ps2_static_manual_finding": "PS2-only: reads one parameter and updates a global with a max-style comparison; reports native VM dispatch status 0 (`CONTINUE`).",
+      "status": "AWAITING_RUNTIME_CAPTURE"
+    },
+    {
+      "opcode": "0x055C",
+      "name": "COMMAND_055C",
+      "psp_runtime": null,
+      "psp_vm_dispatch_status": null,
+      "ps2_static_handler": "0x00186380",
+      "ps2_static_manual_finding": "PS2-only: reads one parameter and updates a separate global through the inverse comparison; reports native VM dispatch status 0 (`CONTINUE`).",
+      "status": "AWAITING_RUNTIME_CAPTURE"
+    },
+    {
+      "opcode": "0x055D",
+      "name": "COMMAND_055D",
+      "psp_runtime": null,
+      "psp_vm_dispatch_status": null,
+      "ps2_static_handler": "0x001863d0",
+      "ps2_static_manual_finding": "PS2-only: reads one parameter and updates another global through the inverse comparison; reports native VM dispatch status 0 (`CONTINUE`).",
+      "status": "AWAITING_RUNTIME_CAPTURE"
+    },
+    {
+      "opcode": "0x055E",
+      "name": "COMMAND_055E",
+      "psp_runtime": null,
+      "psp_vm_dispatch_status": null,
+      "ps2_static_handler": "0x00186420",
+      "ps2_static_manual_finding": "PS2-only: reads one parameter and updates another global through the inverse comparison; reports native VM dispatch status 0 (`CONTINUE`).",
+      "status": "AWAITING_RUNTIME_CAPTURE"
+    },
+    {
+      "opcode": "0x055F",
+      "name": "COMMAND_055F",
+      "psp_runtime": null,
+      "psp_vm_dispatch_status": null,
+      "ps2_static_handler": "0x00186470",
+      "ps2_static_manual_finding": "PS2-only: reads one parameter, calls 0x0028A5E0 with that value and reports native VM dispatch status 0 (`CONTINUE`).",
+      "status": "AWAITING_RUNTIME_CAPTURE"
+    },
+    {
+      "opcode": "0x0560",
+      "name": "COMMAND_0560",
+      "psp_runtime": null,
+      "psp_vm_dispatch_status": null,
+      "ps2_static_handler": "0x00186578",
+      "ps2_static_manual_finding": "PS2-only: reads one parameter, calls 0x0028A5E0 with that value and reports native VM dispatch status 0 (`CONTINUE`).",
+      "status": "AWAITING_RUNTIME_CAPTURE"
+    },
+    {
+      "opcode": "0x0561",
+      "name": "COMMAND_0561",
+      "psp_runtime": null,
+      "psp_vm_dispatch_status": null,
+      "ps2_static_handler": "0x001864c0",
+      "ps2_static_manual_finding": "PS2-only: reads one parameter, applies floating-point scale/rounding and stores a max-clamped result to a global; reports native VM dispatch status 0 (`CONTINUE`).",
+      "status": "AWAITING_RUNTIME_CAPTURE"
+    },
+    {
+      "opcode": "0x0562",
+      "name": "COMMAND_0562",
+      "psp_runtime": null,
+      "psp_vm_dispatch_status": null,
+      "ps2_static_handler": "0x00186538",
+      "ps2_static_manual_finding": "PS2-only: reads one parameter, calls 0x0028A608 with that value and reports native VM dispatch status 0 (`CONTINUE`).",
+      "status": "AWAITING_RUNTIME_CAPTURE"
+    },
+    {
+      "opcode": "0x0563",
+      "name": "COMMAND_0563",
+      "psp_runtime": null,
+      "psp_vm_dispatch_status": null,
+      "ps2_static_handler": "0x0041e8c8",
+      "ps2_static_manual_finding": "PS2-only: reads two parameters, resolves an object and sets or clears bit 0 in its +0x1e0 field; reports native VM dispatch status 0 (`CONTINUE`).",
+      "status": "AWAITING_RUNTIME_CAPTURE"
+    },
+    {
+      "opcode": "0x0564",
+      "name": "COMMAND_0564",
+      "psp_runtime": null,
+      "psp_vm_dispatch_status": null,
+      "ps2_static_handler": "0x00391eb8",
+      "ps2_static_manual_finding": "PS2-only: reads one parameter and sets a global flag at 0x00487724 to zero/nonzero; reports native VM dispatch status 0 (`CONTINUE`).",
+      "status": "AWAITING_RUNTIME_CAPTURE"
+    }
+  ]
+}

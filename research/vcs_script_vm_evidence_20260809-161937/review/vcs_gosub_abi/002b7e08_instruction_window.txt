@@ -1,0 +1,21 @@
+REVIEW-ONLY instruction window @ 0x002b7e08
+Program: GTA_VCS_Debug_EBOOT.ELF
+
+0x002b7e08  addiu sp,sp,-0x10  ; flow=FALL_THROUGH
+0x002b7e0c  sw s0,0x0(sp)  ; flow=FALL_THROUGH
+0x002b7e10  or s0,a0,zero  ; flow=FALL_THROUGH
+0x002b7e14  sw s1,0x4(sp)  ; flow=FALL_THROUGH
+0x002b7e18  lui s1,0x2  ; flow=FALL_THROUGH
+0x002b7e1c  addiu a1,s0,0x10  ; flow=FALL_THROUGH
+0x002b7e20  ori a2,zero,0x1  ; flow=FALL_THROUGH
+0x002b7e24  sw ra,0x8(sp)  ; flow=FALL_THROUGH
+0x002b7e28  jal 0x0006189c  ; flow=CALL_TERMINATOR
+0x002b7e2c  _addiu a3,s1,-0x2968  ; flow=FALL_THROUGH
+0x002b7e88  addiu sp,sp,-0x10  ; flow=FALL_THROUGH
+0x002b7e8c  sw ra,0x0(sp)  ; flow=FALL_THROUGH
+0x002b7e90  jal 0x0005f09c  ; flow=UNCONDITIONAL_CALL
+0x002b7e94  _nop  ; flow=FALL_THROUGH
+0x002b7e98  or v0,zero,zero  ; flow=FALL_THROUGH
+0x002b7e9c  lw ra,0x0(sp)  ; flow=FALL_THROUGH
+0x002b7ea0  jr ra  ; flow=TERMINATOR
+0x002b7ea4  _addiu sp,sp,0x10  ; flow=FALL_THROUGH

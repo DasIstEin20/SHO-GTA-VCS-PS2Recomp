@@ -1,0 +1,24 @@
+REVIEW-ONLY instruction window @ 0x00391eb8
+Program: SLES_546.22
+
+0x00391eb8  addiu sp,sp,-0x10  ; flow=FALL_THROUGH
+0x00391ebc  li a2,0x1  ; flow=FALL_THROUGH
+0x00391ec0  sd s0,0x0(sp)  ; flow=FALL_THROUGH
+0x00391ec4  addiu a1,a0,0x10  ; flow=FALL_THROUGH
+0x00391ec8  lui s0,0x51  ; flow=FALL_THROUGH
+0x00391ecc  sd ra,0x8(sp)  ; flow=FALL_THROUGH
+0x00391ed0  jal 0x00254d18  ; flow=UNCONDITIONAL_CALL
+0x00391ed4  _addiu a3,s0,-0x1e08  ; flow=FALL_THROUGH
+0x00391ed8  lw v1,-0x1e08(s0)  ; flow=FALL_THROUGH
+0x00391edc  beq v1,zero,0x00391ef0  ; flow=CONDITIONAL_JUMP
+0x00391ee0  _lui v1,0x48  ; flow=FALL_THROUGH
+0x00391ee4  li v0,0x1  ; flow=FALL_THROUGH
+0x00391ee8  b 0x00391ef8  ; flow=UNCONDITIONAL_JUMP
+0x00391eec  _sw v0,0x7724(v1)  ; flow=FALL_THROUGH
+0x00391ef0  lui v0,0x48  ; flow=FALL_THROUGH
+0x00391ef4  sw zero,0x7724(v0)  ; flow=FALL_THROUGH
+0x00391ef8  ld s0,0x0(sp)  ; flow=FALL_THROUGH
+0x00391efc  move v0,zero  ; flow=FALL_THROUGH
+0x00391f00  ld ra,0x8(sp)  ; flow=FALL_THROUGH
+0x00391f04  jr ra  ; flow=TERMINATOR
+0x00391f08  _addiu sp,sp,0x10  ; flow=FALL_THROUGH

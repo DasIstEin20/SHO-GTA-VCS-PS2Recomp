@@ -1,0 +1,97 @@
+{
+  "schema": 1,
+  "created_at": "2026-08-09T00:21:40.7452065Z",
+  "scope": "script_vm_matcher pre-exact-android-symbol architecture",
+  "excluded": [
+    "work/ Ghidra project databases",
+    "handoff-* copies",
+    "existing zip archives"
+  ],
+  "files": [
+    {
+      "path": "HANDOFF.md",
+      "bytes": 1632,
+      "sha256": "CD67EF921C09E9E81F4CFC3DA942DA953D3A899B5E77CD9016E9BD44143DE350"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2776,
+      "sha256": "98E3B93BAA49221B3A241084A1D211FA6020BC38C021C05F498927E80D7032BC"
+    },
+    {
+      "path": "run-four-way.ps1",
+      "bytes": 2763,
+      "sha256": "1935C0A3E8CAAC69DA8773777261A6741D20298E7A1408D1442EA1925ADFCFD7"
+    },
+    {
+      "path": "artifacts\\.gitkeep",
+      "bytes": 1,
+      "sha256": "01BA4719C80B6FE911B091A7C05124B64EEECE964E09C058EF8F9805DACA546B"
+    },
+    {
+      "path": "artifacts\\four_way_matches.json",
+      "bytes": 128673,
+      "sha256": "0FA1BA08DEF19E54022DB2B3838E9E93D068A80D068DECB670F9866828882D1B"
+    },
+    {
+      "path": "artifacts\\four_way_report.md",
+      "bytes": 1944,
+      "sha256": "41B81FCFE8BDF3E6325D05E4F497713421CCFDCF04134A2BBD61B085971787C2"
+    },
+    {
+      "path": "artifacts\\ps2_evidence.json",
+      "bytes": 1651,
+      "sha256": "3B7006F3CCCFE3C0F4B080F618B51D10232B5C5C1C9F6E815736730A64EDC446"
+    },
+    {
+      "path": "artifacts\\source_semantics.json",
+      "bytes": 470582,
+      "sha256": "B80DFC62AABCBB04DAC53121CDE46E884CD5AD0A5B534AD1E24E3B6CC553A2D4"
+    },
+    {
+      "path": "artifacts\\exports\\.gitkeep",
+      "bytes": 1,
+      "sha256": "01BA4719C80B6FE911B091A7C05124B64EEECE964E09C058EF8F9805DACA546B"
+    },
+    {
+      "path": "artifacts\\exports\\lcs_android.json",
+      "bytes": 9201780,
+      "sha256": "7AF2C39A94B63C7E9224AE6AA16924BE913AE158B64C2EC52FC593D564CB4F14"
+    },
+    {
+      "path": "artifacts\\exports\\lcs_psp.json",
+      "bytes": 3918969,
+      "sha256": "70D567EC44E61094BFEBA058FE05469214EF947CF4D73BDCFB4384FC049B98E3"
+    },
+    {
+      "path": "artifacts\\exports\\relcs.json",
+      "bytes": 1508628,
+      "sha256": "0225D129D29D83D41496DE2AB7A49B334746C002077A783D8FB372615E52DFDF"
+    },
+    {
+      "path": "artifacts\\exports\\vcs_psp.json",
+      "bytes": 5331865,
+      "sha256": "B3CF1A58F0C2B3204190ED879713FB7BEAD8D19A43B9A4D65B68A6A195CA9767"
+    },
+    {
+      "path": "config\\paths.json",
+      "bytes": 1099,
+      "sha256": "6B2706AD69D3FFCD669DCCF7856CC39ABBD93C3E94DE28106F33B19B78115FE4"
+    },
+    {
+      "path": "ghidra\\ExportScriptVm.java",
+      "bytes": 12075,
+      "sha256": "7FC765F969FEE280431DD026FA1078DDAA9BA8401B32EC15A7C51C109462A262"
+    },
+    {
+      "path": "src\\script_vm_matcher.py",
+      "bytes": 28966,
+      "sha256": "4134DC872B64D6AE335C834C555E32560A4D63D3FA842E1264E17AF38569B5AC"
+    },
+    {
+      "path": "tests\\test_matcher.py",
+      "bytes": 3082,
+      "sha256": "02A2B5B6DFA8B0CE1E20FC300AE3FDC1F456B632AF25EF129B495278B7C9AA84"
+    }
+  ]
+}

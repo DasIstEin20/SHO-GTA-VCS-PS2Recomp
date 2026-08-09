@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "created_at": "2026-08-09T00:21:41.3260345Z",
+  "status": "UNCONFIRMED_REVIEW",
+  "reason": "Superseded by exact Android symbol seed architecture; fuzzy score alone is invalid.",
+  "source_file": "script_vm_matcher/artifacts/four_way_matches.json",
+  "source_sha256": "0FA1BA08DEF19E54022DB2B3838E9E93D068A80D068DECB670F9866828882D1B",
+  "match_count": 9,
+  "matches": [
+    {
+      "source_anchor": "CRunningScript::Process",
+      "score": 0.9022,
+      "runner_up": 0.9002,
+      "margin": 0.002,
+      "previous_classification": "review",
+      "status": "UNCONFIRMED_REVIEW"
+    },
+    {
+      "source_anchor": "CTheScripts::Init",
+      "score": 0.8856,
+      "runner_up": 0.8855,
+      "margin": 0.0001,
+      "previous_classification": "review",
+      "status": "UNCONFIRMED_REVIEW"
+    },
+    {
+      "source_anchor": "CRunningScript::StoreParameters",
+      "score": 0.884,
+      "runner_up": 0.8837,
+      "margin": 0.0003,
+      "previous_classification": "review",
+      "status": "UNCONFIRMED_REVIEW"
+    },
+    {
+      "source_anchor": "CRunningScript::ProcessOneCommand",
+      "score": 0.8815,
+      "runner_up": 0.8707,
+      "margin": 0.0108,
+      "previous_classification": "review",
+      "status": "UNCONFIRMED_REVIEW"
+    },
+    {
+      "source_anchor": "CTheScripts::Process",
+      "score": 0.8794,
+      "runner_up": 0.8793,
+      "margin": 0.0001,
+      "previous_classification": "review",
+      "status": "UNCONFIRMED_REVIEW"
+    },
+    {
+      "source_anchor": "CRunningScript::CollectNextParameterWithoutIncreasingPC",
+      "score": 0.8746,
+      "runner_up": 0.8734,
+      "margin": 0.0012,
+      "previous_classification": "review",
+      "status": "UNCONFIRMED_REVIEW"
+    },
+    {
+      "source_anchor": "CTheScripts::StartNewScript",
+      "score": 0.8685,
+      "runner_up": 0.8682,
+      "margin": 0.0003,
+      "previous_classification": "review",
+      "status": "UNCONFIRMED_REVIEW"
+    },
+    {
+      "source_anchor": "CRunningScript::ProcessCommands0To99",
+      "score": 0.8598,
+      "runner_up": 0.8593,
+      "margin": 0.0005,
+      "previous_classification": "review",
+      "status": "UNCONFIRMED_REVIEW"
+    },
+    {
+      "source_anchor": "CTheScripts::Read1ByteFromScript",
+      "score": 0.8325,
+      "runner_up": 0.8321,
+      "margin": 0.0004,
+      "previous_classification": "review",
+      "status": "UNCONFIRMED_REVIEW"
+    }
+  ]
+}

@@ -1,0 +1,1361 @@
+{
+  "schema": "vcs-main-scm-opcode-usage/v1",
+  "method": "linear main-segment decode from recovered parameter widths; unknown data aborts rather than resynchronizing",
+  "input": {
+    "path": "GTA VCS [Debug Build]\\PSP_GAME\\USRDIR\\RUNDATA\\MAIN.SCM",
+    "sha256": "4d278aeaadd2565c5c82c52df42c132191cc57fe06230ff5d529d6aad51dfc67",
+    "bytes": 1839093,
+    "header": {
+      "main_segment_end": "0x03A4D6",
+      "secondary_header_u32": "0x0000969C",
+      "non_code_header_bytes": "0x000008",
+      "main_script_name_marker": "SCRIPT_NAME \"MAIN\"",
+      "linear_entry_point": "0x007868"
+    }
+  },
+  "evidence_boundary": [
+    "Counts are static bytecode occurrences, not execution frequency or reachability.",
+    "Command names/parameter counts come from the public VCS Sanny library and are used only to delimit bytecode, except for individually proved VM-width overrides.",
+    "Opcode 0024 START_NEW_SCRIPT is the first override: native PSP/PS2 decode one script index plus 0x60 child-local parameters, not the library's label/arguments pseudo-arity.",
+    "CALL/CALL_NOT use the separately proved VCS header/input/output layout.",
+    "VCS PSP CollectParameters maps tag 0x00 to a one-byte zero-value case; it is not imported as the reLCS ARGUMENT_END convention.",
+    "The scanner stops on the first undecodable command and never treats data as resynchronised code."
+  ],
+  "scan": {
+    "decoded_instruction_count": 1893,
+    "cursor_after_last_decoded_instruction": "0x00A8C2",
+    "fully_decoded": false,
+    "failures": [
+      {
+        "offset": "0x00A8C0",
+        "raw_opcode": "0x120D",
+        "normalized_opcode": "0x120D",
+        "reason": "opcode is absent from the VCS public command library"
+      }
+    ],
+    "call_or_call_not_count": 98,
+    "mission_stream_selector_sites": [
+      {
+        "parameter_tag": "0x01",
+        "literal": 0,
+        "classification": "direct_integer_literal",
+        "file_offset": "0x007891",
+        "raw_opcode": "0x0289"
+      },
+      {
+        "parameter_tag": "0x07",
+        "literal": 1,
+        "classification": "direct_integer_literal",
+        "file_offset": "0x007894",
+        "raw_opcode": "0x0289"
+      },
+      {
+        "parameter_tag": "0x07",
+        "literal": 2,
+        "classification": "direct_integer_literal",
+        "file_offset": "0x007898",
+        "raw_opcode": "0x0289"
+      },
+      {
+        "parameter_tag": "0x07",
+        "literal": 3,
+        "classification": "direct_integer_literal",
+        "file_offset": "0x00789C",
+        "raw_opcode": "0x0289"
+      },
+      {
+        "parameter_tag": "0x07",
+        "literal": 4,
+        "classification": "direct_integer_literal",
+        "file_offset": "0x0078A0",
+        "raw_opcode": "0x0289"
+      },
+      {
+        "parameter_tag": "0x07",
+        "literal": 5,
+        "classification": "direct_integer_literal",
+        "file_offset": "0x0078A4",
+        "raw_opcode": "0x0289"
+      },
+      {
+        "parameter_tag": "0x07",
+        "literal": 6,
+        "classification": "direct_integer_literal",
+        "file_offset": "0x0078A8",
+        "raw_opcode": "0x0289"
+      },
+      {
+        "parameter_tag": "0x07",
+        "literal": 7,
+        "classification": "direct_integer_literal",
+        "file_offset": "0x007A51",
+        "raw_opcode": "0x0289"
+      },
+      {
+        "parameter_tag": "0x07",
+        "literal": 8,
+        "classification": "direct_integer_literal",
+        "file_offset": "0x007AF6",
+        "raw_opcode": "0x0289"
+      },
+      {
+        "parameter_tag": "0x07",
+        "literal": 8,
+        "classification": "direct_integer_literal",
+        "file_offset": "0x007B8E",
+        "raw_opcode": "0x0289"
+      },
+      {
+        "parameter_tag": "0x07",
+        "literal": 9,
+        "classification": "direct_integer_literal",
+        "file_offset": "0x007BB8",
+        "raw_opcode": "0x0289"
+      }
+    ],
+    "parameter_tag_counts": [
+      {
+        "tag": "0x06",
+        "count": 680
+      },
+      {
+        "tag": "0x07",
+        "count": 433
+      },
+      {
+        "tag": "0x01",
+        "count": 346
+      },
+      {
+        "tag": "0x0E",
+        "count": 240
+      },
+      {
+        "tag": "0x09",
+        "count": 168
+      },
+      {
+        "tag": "0x0D",
+        "count": 167
+      },
+      {
+        "tag": "0x10",
+        "count": 122
+      },
+      {
+        "tag": "0xCE",
+        "count": 113
+      },
+      {
+        "tag": "0x11",
+        "count": 107
+      },
+      {
+        "tag": "0x0F",
+        "count": 101
+      },
+      {
+        "tag": "0x12",
+        "count": 99
+      },
+      {
+        "tag": "0xD0",
+        "count": 86
+      },
+      {
+        "tag": "0x0A",
+        "count": 61
+      },
+      {
+        "tag": "0x13",
+        "count": 55
+      },
+      {
+        "tag": "0xCF",
+        "count": 43
+      },
+      {
+        "tag": "0x08",
+        "count": 42
+      },
+      {
+        "tag": "0xD2",
+        "count": 42
+      },
+      {
+        "tag": "0x14",
+        "count": 40
+      },
+      {
+        "tag": "0x04",
+        "count": 38
+      },
+      {
+        "tag": "0x16",
+        "count": 32
+      },
+      {
+        "tag": "0x15",
+        "count": 31
+      },
+      {
+        "tag": "0xD4",
+        "count": 27
+      },
+      {
+        "tag": "0x00",
+        "count": 25
+      },
+      {
+        "tag": "0xE6",
+        "count": 20
+      },
+      {
+        "tag": "0xEE",
+        "count": 19
+      },
+      {
+        "tag": "0xCD",
+        "count": 18
+      },
+      {
+        "tag": "0x17",
+        "count": 17
+      },
+      {
+        "tag": "0xD3",
+        "count": 15
+      },
+      {
+        "tag": "0x18",
+        "count": 15
+      },
+      {
+        "tag": "0x19",
+        "count": 15
+      },
+      {
+        "tag": "0x1A",
+        "count": 14
+      },
+      {
+        "tag": "0x05",
+        "count": 13
+      },
+      {
+        "tag": "0xE7",
+        "count": 8
+      },
+      {
+        "tag": "0xED",
+        "count": 8
+      },
+      {
+        "tag": "0xF7",
+        "count": 7
+      },
+      {
+        "tag": "0x1B",
+        "count": 6
+      },
+      {
+        "tag": "0x03",
+        "count": 5
+      },
+      {
+        "tag": "0x58",
+        "count": 5
+      },
+      {
+        "tag": "0xD5",
+        "count": 4
+      },
+      {
+        "tag": "0x22",
+        "count": 4
+      },
+      {
+        "tag": "0x5F",
+        "count": 4
+      },
+      {
+        "tag": "0x02",
+        "count": 3
+      },
+      {
+        "tag": "0x26",
+        "count": 2
+      },
+      {
+        "tag": "0x28",
+        "count": 2
+      },
+      {
+        "tag": "0x80",
+        "count": 2
+      },
+      {
+        "tag": "0xB4",
+        "count": 2
+      },
+      {
+        "tag": "0xD8",
+        "count": 1
+      },
+      {
+        "tag": "0xE9",
+        "count": 1
+      },
+      {
+        "tag": "0x8D",
+        "count": 1
+      },
+      {
+        "tag": "0x40",
+        "count": 1
+      },
+      {
+        "tag": "0x50",
+        "count": 1
+      },
+      {
+        "tag": "0x9F",
+        "count": 1
+      },
+      {
+        "tag": "0xA7",
+        "count": 1
+      },
+      {
+        "tag": "0x7B",
+        "count": 1
+      }
+    ],
+    "opcodes_by_frequency": [
+      {
+        "opcode": "0x0022",
+        "name": "GOTO_IF_FALSE",
+        "count": 298,
+        "public_num_params": 1,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0004",
+        "name": "SET_VAR_INT",
+        "count": 285,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0005",
+        "name": "SET_VAR_FLOAT",
+        "count": 193,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x001B",
+        "name": "IS_INT_VAR_EQUAL_TO_NUMBER",
+        "count": 184,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": true
+      },
+      {
+        "opcode": "0x0002",
+        "name": "GOTO",
+        "count": 178,
+        "public_num_params": 1,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x037B",
+        "name": "CALL",
+        "count": 96,
+        "public_num_params": 5,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0026",
+        "name": "RETURN",
+        "count": 75,
+        "public_num_params": 0,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0036",
+        "name": "SET_VAR_FLOAT_TO_VAR_FLOAT",
+        "count": 49,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x01BA",
+        "name": "GOSUB_FILE",
+        "count": 39,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x005E",
+        "name": "RETURN_TRUE",
+        "count": 27,
+        "public_num_params": 0,
+        "recovered_vm_parameter_count": null,
+        "is_condition": true
+      },
+      {
+        "opcode": "0x0001",
+        "name": "WAIT",
+        "count": 24,
+        "public_num_params": 1,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0035",
+        "name": "SET_VAR_INT_TO_VAR_INT",
+        "count": 23,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0045",
+        "name": "IS_CHAR_STILL_ALIVE",
+        "count": 20,
+        "public_num_params": 1,
+        "recovered_vm_parameter_count": null,
+        "is_condition": true
+      },
+      {
+        "opcode": "0x002E",
+        "name": "MULT_FLOAT_VAR_BY_FLOAT_VAR",
+        "count": 19,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x005F",
+        "name": "RETURN_FALSE",
+        "count": 18,
+        "public_num_params": 0,
+        "recovered_vm_parameter_count": null,
+        "is_condition": true
+      },
+      {
+        "opcode": "0x0007",
+        "name": "ADD_VAL_TO_INT_VAR",
+        "count": 16,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x00C9",
+        "name": "DO_FADE",
+        "count": 15,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x002C",
+        "name": "SUB_FLOAT_VAR_FROM_FLOAT_VAR",
+        "count": 14,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0006",
+        "name": "SET_VAR_TEXT_LABEL",
+        "count": 12,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0289",
+        "name": "LOAD_AND_LAUNCH_MISSION_INTERNAL",
+        "count": 11,
+        "public_num_params": 1,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0078",
+        "name": "IF",
+        "count": 11,
+        "public_num_params": 1,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x000F",
+        "name": "IS_INT_VAR_GREATER_THAN_NUMBER",
+        "count": 11,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": true
+      },
+      {
+        "opcode": "0x0011",
+        "name": "IS_INT_VAR_GREATER_THAN_INT_VAR",
+        "count": 11,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": true
+      },
+      {
+        "opcode": "0x0079",
+        "name": "LAUNCH_MISSION",
+        "count": 9,
+        "public_num_params": 1,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x00C8",
+        "name": "SET_FADING_COLOUR",
+        "count": 9,
+        "public_num_params": 3,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0010",
+        "name": "IS_NUMBER_GREATER_THAN_INT_VAR",
+        "count": 8,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": true
+      },
+      {
+        "opcode": "0x00CA",
+        "name": "GET_FADING_STATUS",
+        "count": 8,
+        "public_num_params": 0,
+        "recovered_vm_parameter_count": null,
+        "is_condition": true
+      },
+      {
+        "opcode": "0x0009",
+        "name": "SUB_VAL_FROM_INT_VAR",
+        "count": 8,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x002A",
+        "name": "ADD_FLOAT_VAR_TO_FLOAT_VAR",
+        "count": 8,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0377",
+        "name": "GET_PAD_STATE",
+        "count": 7,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0107",
+        "name": "SET_PLAYER_CONTROL",
+        "count": 6,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x04E5",
+        "name": "SET_NUMBER_OF_EMPIRE_BUSINESS_SITES_OWNED",
+        "count": 6,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x010E",
+        "name": "GET_GAME_TIMER",
+        "count": 6,
+        "public_num_params": 1,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0049",
+        "name": "DELETE_CAR",
+        "count": 6,
+        "public_num_params": 1,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0030",
+        "name": "DIV_FLOAT_VAR_BY_FLOAT_VAR",
+        "count": 6,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0013",
+        "name": "IS_NUMBER_GREATER_THAN_FLOAT_VAR",
+        "count": 6,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": true
+      },
+      {
+        "opcode": "0x001C",
+        "name": "IS_INT_VAR_EQUAL_TO_INT_VAR",
+        "count": 5,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": true
+      },
+      {
+        "opcode": "0x0029",
+        "name": "ADD_INT_VAR_TO_INT_VAR",
+        "count": 5,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0039",
+        "name": "CSET_VAR_FLOAT_TO_VAR_INT",
+        "count": 5,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0401",
+        "name": "DISABLE_PAUSE_MENU",
+        "count": 4,
+        "public_num_params": 1,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x007F",
+        "name": "IS_BUTTON_PRESSED",
+        "count": 4,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": true
+      },
+      {
+        "opcode": "0x0268",
+        "name": "CLEAR_HELP",
+        "count": 4,
+        "public_num_params": 0,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x00A5",
+        "name": "HAS_PLAYER_BEEN_ARRESTED",
+        "count": 4,
+        "public_num_params": 1,
+        "recovered_vm_parameter_count": null,
+        "is_condition": true
+      },
+      {
+        "opcode": "0x0037",
+        "name": "SET_VAR_TEXT_LABEL_TO_VAR_TEXT_LABEL",
+        "count": 4,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x03F8",
+        "name": "STORE_PLAYER_OUTFIT",
+        "count": 4,
+        "public_num_params": 1,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0044",
+        "name": "SET_CHAR_COORDINATES",
+        "count": 4,
+        "public_num_params": 4,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x02E2",
+        "name": "SET_VAR_INT_TO_CONSTANT",
+        "count": 4,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x001D",
+        "name": "IS_FLOAT_VAR_EQUAL_TO_NUMBER",
+        "count": 4,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": true
+      },
+      {
+        "opcode": "0x000C",
+        "name": "MULT_FLOAT_VAR_BY_VAL",
+        "count": 4,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0017",
+        "name": "IS_INT_VAR_GREATER_OR_EQUAL_TO_INT_VAR",
+        "count": 4,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": true
+      },
+      {
+        "opcode": "0x009F",
+        "name": "IS_CHAR_DEAD",
+        "count": 3,
+        "public_num_params": 1,
+        "recovered_vm_parameter_count": null,
+        "is_condition": true
+      },
+      {
+        "opcode": "0x0015",
+        "name": "IS_INT_VAR_GREATER_OR_EQUAL_TO_NUMBER",
+        "count": 3,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": true
+      },
+      {
+        "opcode": "0x0059",
+        "name": "CLEAR_PRINTS",
+        "count": 3,
+        "public_num_params": 0,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0113",
+        "name": "MARK_CAR_AS_NO_LONGER_NEEDED",
+        "count": 3,
+        "public_num_params": 1,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x001E",
+        "name": "IS_FLOAT_VAR_EQUAL_TO_FLOAT_VAR",
+        "count": 3,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": true
+      },
+      {
+        "opcode": "0x0014",
+        "name": "IS_FLOAT_VAR_GREATER_THAN_FLOAT_VAR",
+        "count": 3,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": true
+      },
+      {
+        "opcode": "0x0038",
+        "name": "CSET_VAR_INT_TO_VAR_FLOAT",
+        "count": 3,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0012",
+        "name": "IS_FLOAT_VAR_GREATER_THAN_NUMBER",
+        "count": 3,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": true
+      },
+      {
+        "opcode": "0x0238",
+        "name": "SCRIPT_NAME",
+        "count": 2,
+        "public_num_params": 1,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0455",
+        "name": "ADD_EMPIRE_HUD_TEXT_ELEMENT_WITH_NUMBERS",
+        "count": 2,
+        "public_num_params": 12,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0318",
+        "name": "IS_PLAYER_WEARING",
+        "count": 2,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": true
+      },
+      {
+        "opcode": "0x0458",
+        "name": "SET_EMPIRE_HUD_TEXT_ELEMENT_SIZE",
+        "count": 2,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0457",
+        "name": "SET_EMPIRE_HUD_ELEMENT_COLOUR",
+        "count": 2,
+        "public_num_params": 5,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x00B9",
+        "name": "SET_FIXED_CAMERA_POSITION",
+        "count": 2,
+        "public_num_params": 6,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x00B3",
+        "name": "POINT_CAMERA_AT_PLAYER",
+        "count": 2,
+        "public_num_params": 3,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x034B",
+        "name": "DOES_VEHICLE_EXIST",
+        "count": 2,
+        "public_num_params": 1,
+        "recovered_vm_parameter_count": null,
+        "is_condition": true
+      },
+      {
+        "opcode": "0x00A0",
+        "name": "IS_CAR_DEAD",
+        "count": 2,
+        "public_num_params": 1,
+        "recovered_vm_parameter_count": null,
+        "is_condition": true
+      },
+      {
+        "opcode": "0x007C",
+        "name": "IS_CHAR_IN_CAR",
+        "count": 2,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": true
+      },
+      {
+        "opcode": "0x01FF",
+        "name": "SET_FREE_RESPRAYS",
+        "count": 2,
+        "public_num_params": 1,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x02F8",
+        "name": "FREEZE_CHAR_POSITION",
+        "count": 2,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0530",
+        "name": "DISABLE_SPLASH_SCREEN_WHEN_MOVING_BETWEEN_LEVELS",
+        "count": 2,
+        "public_num_params": 1,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x009D",
+        "name": "HAS_DEATHARREST_BEEN_EXECUTED",
+        "count": 2,
+        "public_num_params": 0,
+        "recovered_vm_parameter_count": null,
+        "is_condition": true
+      },
+      {
+        "opcode": "0x002B",
+        "name": "SUB_INT_VAR_FROM_INT_VAR",
+        "count": 2,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x001A",
+        "name": "IS_FLOAT_VAR_GREATER_OR_EQUAL_TO_FLOAT_VAR",
+        "count": 2,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": true
+      },
+      {
+        "opcode": "0x0373",
+        "name": "GET_DOT_PRODUCT_3D",
+        "count": 2,
+        "public_num_params": 7,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x037A",
+        "name": "CALL_NOT",
+        "count": 2,
+        "public_num_params": 5,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x03FD",
+        "name": "IS_FINAL_GAME",
+        "count": 1,
+        "public_num_params": 0,
+        "recovered_vm_parameter_count": null,
+        "is_condition": true
+      },
+      {
+        "opcode": "0x03E5",
+        "name": "IS_DEVELOPER",
+        "count": 1,
+        "public_num_params": 0,
+        "recovered_vm_parameter_count": null,
+        "is_condition": true
+      },
+      {
+        "opcode": "0x03E6",
+        "name": "SET_DEVELOPER_FLAG",
+        "count": 1,
+        "public_num_params": 1,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0456",
+        "name": "REMOVE_EMPIRE_HUD_ELEMENT",
+        "count": 1,
+        "public_num_params": 1,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x044E",
+        "name": "SET_EMPIRE_HUD_ELEMENT_VISIBLE_STATE",
+        "count": 1,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0451",
+        "name": "SET_EMPIRE_HUD_ELEMENT_SIZE",
+        "count": 1,
+        "public_num_params": 3,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0450",
+        "name": "SET_EMPIRE_HUD_ELEMENT_START_POSITION",
+        "count": 1,
+        "public_num_params": 3,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0452",
+        "name": "SET_EMPIRE_HUD_ELEMENT_BACKGROUND_COLOUR",
+        "count": 1,
+        "public_num_params": 5,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0453",
+        "name": "SET_EMPIRE_HUD_ELEMENT_BORDER_COLOUR",
+        "count": 1,
+        "public_num_params": 5,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0454",
+        "name": "ADD_EMPIRE_HUD_TEXT_ELEMENT",
+        "count": 1,
+        "public_num_params": 5,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x007E",
+        "name": "IS_CHAR_IN_ANY_CAR",
+        "count": 1,
+        "public_num_params": 1,
+        "recovered_vm_parameter_count": null,
+        "is_condition": true
+      },
+      {
+        "opcode": "0x0216",
+        "name": "WARP_CHAR_FROM_CAR_TO_COORD",
+        "count": 1,
+        "public_num_params": 4,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x020F",
+        "name": "UNDRESS_CHAR",
+        "count": 1,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x03F2",
+        "name": "UNLOCK_OUTFIT",
+        "count": 1,
+        "public_num_params": 1,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x04F3",
+        "name": "LOCK_THE_COSTUME",
+        "count": 1,
+        "public_num_params": 1,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0352",
+        "name": "CLEAR_ALL_CHAR_ANIMS",
+        "count": 1,
+        "public_num_params": 1,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x028D",
+        "name": "SET_NEAR_CLIP",
+        "count": 1,
+        "public_num_params": 1,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0008",
+        "name": "ADD_VAL_TO_FLOAT_VAR",
+        "count": 1,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x01BB",
+        "name": "GET_GROUND_Z_FOR_3D_COORD",
+        "count": 1,
+        "public_num_params": 4,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x00CF",
+        "name": "SET_CHAR_HEADING",
+        "count": 1,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x02EE",
+        "name": "GET_OFFSET_FROM_CHAR_IN_WORLD_COORDS",
+        "count": 1,
+        "public_num_params": 7,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0407",
+        "name": "PRINT_HELP_FOREVER_NO_BRIEF",
+        "count": 1,
+        "public_num_params": 1,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0323",
+        "name": "PRINT_HELP_FOREVER",
+        "count": 1,
+        "public_num_params": 1,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0057",
+        "name": "PRINT_NOW",
+        "count": 1,
+        "public_num_params": 3,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x03B0",
+        "name": "REGISTER_OUTFIT_CHANGED",
+        "count": 1,
+        "public_num_params": 0,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x009A",
+        "name": "IS_WANTED_LEVEL_GREATER",
+        "count": 1,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": true
+      },
+      {
+        "opcode": "0x009B",
+        "name": "CLEAR_WANTED_LEVEL",
+        "count": 1,
+        "public_num_params": 1,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x026A",
+        "name": "IS_CHAR_IN_CONTROL",
+        "count": 1,
+        "public_num_params": 1,
+        "recovered_vm_parameter_count": null,
+        "is_condition": true
+      },
+      {
+        "opcode": "0x0221",
+        "name": "SET_CAMERA_BEHIND_PLAYER",
+        "count": 1,
+        "public_num_params": 0,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x00B6",
+        "name": "RESTORE_CAMERA",
+        "count": 1,
+        "public_num_params": 0,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0160",
+        "name": "REQUEST_MODEL",
+        "count": 1,
+        "public_num_params": 1,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0161",
+        "name": "HAS_MODEL_LOADED",
+        "count": 1,
+        "public_num_params": 1,
+        "recovered_vm_parameter_count": null,
+        "is_condition": true
+      },
+      {
+        "opcode": "0x03C2",
+        "name": "CLEAR_BIG_MESSAGES",
+        "count": 1,
+        "public_num_params": 0,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x012E",
+        "name": "SET_POLICE_IGNORE_PLAYER",
+        "count": 1,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x02C0",
+        "name": "GET_CURRENT_CHAR_WEAPON",
+        "count": 1,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x033F",
+        "name": "CLEAR_TAXI_SHORTCUT",
+        "count": 1,
+        "public_num_params": 0,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x01B3",
+        "name": "IS_CAR_IN_WATER",
+        "count": 1,
+        "public_num_params": 1,
+        "recovered_vm_parameter_count": null,
+        "is_condition": true
+      },
+      {
+        "opcode": "0x0043",
+        "name": "GET_CHAR_COORDINATES",
+        "count": 1,
+        "public_num_params": 4,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0055",
+        "name": "PRINT_BIG",
+        "count": 1,
+        "public_num_params": 3,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x031E",
+        "name": "GET_DISTANCE_BETWEEN_COORDS_3D",
+        "count": 1,
+        "public_num_params": 7,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x01D3",
+        "name": "COS",
+        "count": 1,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x01D2",
+        "name": "SIN",
+        "count": 1,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x000D",
+        "name": "DIV_INT_VAR_BY_VAL",
+        "count": 1,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x000B",
+        "name": "MULT_INT_VAR_BY_VAL",
+        "count": 1,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x040C",
+        "name": "CALC_SCREEN_COORDS_RETURNED_SCREEN_COORDS",
+        "count": 1,
+        "public_num_params": 5,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x04F2",
+        "name": "IS_THIS_SCRIPT_A_MISSION",
+        "count": 1,
+        "public_num_params": 0,
+        "recovered_vm_parameter_count": null,
+        "is_condition": true
+      },
+      {
+        "opcode": "0x0202",
+        "name": "IS_AREA_OCCUPIED",
+        "count": 1,
+        "public_num_params": 11,
+        "recovered_vm_parameter_count": null,
+        "is_condition": true
+      },
+      {
+        "opcode": "0x0048",
+        "name": "CREATE_CAR",
+        "count": 1,
+        "public_num_params": 5,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x00D1",
+        "name": "SET_CAR_HEADING",
+        "count": 1,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0496",
+        "name": "CHANGE_CAR_SCRIPT_COLOUR_SET",
+        "count": 1,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0162",
+        "name": "MARK_MODEL_AS_NO_LONGER_NEEDED",
+        "count": 1,
+        "public_num_params": 1,
+        "recovered_vm_parameter_count": null,
+        "is_condition": false
+      },
+      {
+        "opcode": "0x0024",
+        "name": "START_NEW_SCRIPT",
+        "count": 1,
+        "public_num_params": 2,
+        "recovered_vm_parameter_count": 97,
+        "is_condition": false
+      }
+    ]
+  }
+}

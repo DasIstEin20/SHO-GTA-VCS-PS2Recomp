@@ -1,0 +1,130 @@
+{
+  "schema": "vcs-main-scm-observed-route/v1",
+  "scope": "Read-only portable-VM execution route over original SCM bytes. It records only the one selected entry route; it is neither PPSSPP telemetry nor whole-program reachability.",
+  "input_trace": "reports\\VCS_PSP_MAIN_SCM_ENTRY_ROUTE_TRACE.jsonl",
+  "execution": {
+    "commands": 216,
+    "entry_ip": "0x7860",
+    "terminal": {
+      "index": 215,
+      "ip_before": "0x7889",
+      "raw_opcode": "0x289",
+      "opcode": "0x289",
+      "ip_after": "0x788C",
+      "status": "YIELD",
+      "fault": "Opcode0289RequiresMissionStreamingSubsystem"
+    },
+    "unique_opcodes": 12,
+    "opcode_frequency": [
+      {
+        "opcode": "0x0004",
+        "count": 192
+      },
+      {
+        "opcode": "0x0006",
+        "count": 12
+      },
+      {
+        "opcode": "0x0026",
+        "count": 2
+      },
+      {
+        "opcode": "0x01BA",
+        "count": 2
+      },
+      {
+        "opcode": "0x0002",
+        "count": 1
+      },
+      {
+        "opcode": "0x0005",
+        "count": 1
+      },
+      {
+        "opcode": "0x001B",
+        "count": 1
+      },
+      {
+        "opcode": "0x0022",
+        "count": 1
+      },
+      {
+        "opcode": "0x00C9",
+        "count": 1
+      },
+      {
+        "opcode": "0x0238",
+        "count": 1
+      },
+      {
+        "opcode": "0x0289",
+        "count": 1
+      },
+      {
+        "opcode": "0x0401",
+        "count": 1
+      }
+    ]
+  },
+  "observed_proven_control_transfers": [
+    {
+      "index": 3,
+      "role": "GOSUB_FILE",
+      "opcode": "0x01BA",
+      "ip_before": "0x7871",
+      "ip_after": "0x7BFF",
+      "status": "CONTINUE",
+      "fault": "None"
+    },
+    {
+      "index": 41,
+      "role": "GOTO_IF_FALSE",
+      "opcode": "0x0022",
+      "ip_before": "0x7D20",
+      "ip_after": "0x7D27",
+      "status": "CONTINUE",
+      "fault": "None"
+    },
+    {
+      "index": 211,
+      "role": "GOTO",
+      "opcode": "0x0002",
+      "ip_before": "0x80B4",
+      "ip_after": "0x8101",
+      "status": "CONTINUE",
+      "fault": "None"
+    },
+    {
+      "index": 212,
+      "role": "RETURN",
+      "opcode": "0x0026",
+      "ip_before": "0x8101",
+      "ip_after": "0x787D",
+      "status": "CONTINUE",
+      "fault": "None"
+    },
+    {
+      "index": 213,
+      "role": "GOSUB_FILE",
+      "opcode": "0x01BA",
+      "ip_before": "0x787D",
+      "ip_after": "0x8103",
+      "status": "CONTINUE",
+      "fault": "None"
+    },
+    {
+      "index": 214,
+      "role": "RETURN",
+      "opcode": "0x0026",
+      "ip_before": "0x8103",
+      "ip_after": "0x7889",
+      "status": "CONTINUE",
+      "fault": "None"
+    }
+  ],
+  "guardrails": [
+    "Only opcode roles with an existing VM control-flow proof are rendered as transfer edges.",
+    "A transfer in this route does not establish that every static caller or target is reachable in the game.",
+    "The terminal host-subsystem fault documents an integration boundary; it is not classified as an unknown opcode."
+  ]
+}

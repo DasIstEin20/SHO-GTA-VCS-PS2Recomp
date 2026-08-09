@@ -1,0 +1,54 @@
+{
+  "schema": "ppsspp-vcs-oracle/status-v2",
+  "generated_at": "2026-08-09T05:14:00+02:00",
+  "status": "RUNTIME_PROOF_PARTIAL",
+  "runtime_capture_count": 5,
+  "completed_runtime_proofs": [
+    "0x0001 WAIT",
+    "0x0002 GOTO",
+    "0x037A CALL_NOT",
+    "0x037B CALL",
+    "0x055A OPCODE_055A"
+  ],
+  "awaiting_natural_execution": [
+    "0x0000 NOP"
+  ],
+  "offline_verified": {
+    "dispatcher_rva": "0x0005E5E8",
+    "dispatcher_signature": "f0ffbd270800bfaf248e858f1000868c",
+    "proof_cases": {
+      "0x0000": "0x002B73E0",
+      "0x0001": "0x0029A5A8",
+      "0x0002": "0x002B73E8",
+      "0x037A": "0x002B8714",
+      "0x037B": "0x002B8714",
+      "0x055A": "0x0009E4C8"
+    },
+    "method": "The configuration signature and all six configured handler targets were checked directly against GTA_VCS_Debug_EBOOT.ELF and VCS_PSP_OPCODE_TABLE.json.",
+    "nop_static_contract": "PSP 0x002B73E0 and PS2 0x003B1448 both execute jr ra with a delay-slot v0 = 0. This is VM dispatch status CONTINUE, not an SCM output; NOP has no parameters and no side effects."
+  },
+  "vm_dispatch_abi": {
+    "status_register": "v0",
+    "continue": {
+      "value": 0,
+      "meaning": "Process() immediately executes the next opcode in the same pass."
+    },
+    "nonzero": {
+      "meaning": "Stops the current Process() pass; the exact reason is opcode-specific.",
+      "wait_value_1": "YIELD until the ScriptThread wake condition is reached."
+    },
+    "canonical_contracts": "../../../VCS_PSP_INITIAL_OPCODE_CANONICAL_SEMANTICS.json"
+  },
+  "runtime_readiness": {
+    "websocket_endpoint": "ws://127.0.0.1:16482/debugger",
+    "ppsspp_configured": [
+      "RemoteDebuggerOnStartup = True",
+      "RemoteDebuggerLocal = True",
+      "RemoteISOPort = 16482"
+    ],
+    "configuration_file": "../ppsspp_win_1_20_4/memstick/PSP/SYSTEM/ppsspp.ini",
+    "required_next_step": "Use capture_opcode.py 0x0000 while a VCS script naturally reaches NOP. Two filtered capture windows (20 s and 45 s) during active gameplay did not observe it; this is not evidence that the opcode is absent.",
+    "headless_binary": "The installed PPSSPP 1.20.4 desktop package contains no PPSSPPHeadless.exe. run_headless.ps1 deliberately refuses GUI binaries; a stock headless build can be supplied later without changing the oracle."
+  },
+  "evidence_policy": "Five successful captures are present in runtime_*.jsonl. Each capture contains ScriptThread snapshot diffs and non-pausing PPSSPP memory-breakpoint write-hit counts for IP/NOT plus proof-case fields; it proves only its observed PSP execution path and must be compared with independent PS2 static evidence. Capture-v1 uses the historic field return_value_v0, which the bridge preserves as provenance and normalizes to native_handler_status; it never means an SCM output."
+}

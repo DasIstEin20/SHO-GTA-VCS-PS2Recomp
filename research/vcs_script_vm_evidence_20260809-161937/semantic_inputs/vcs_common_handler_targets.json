@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "purpose": "Ghidra semantic feature targets; table membership only",
+  "comparison": {
+    "path": "R:\\Codex-workspace-misc\\gta-vcs\\VCS_PSP_PS2_OPCODE_COMPARE.json",
+    "sha256": "7cb5634b673604471a1193e2c2016d80491cffa83ec305f746ef90661e4339b3"
+  },
+  "common_slots": 1328,
+  "psp": {
+    "path": "R:\\Codex-workspace-misc\\gta-vcs\\script_vm_matcher\\artifacts\\semantic_inputs\\vcs_psp_common_handlers.tsv",
+    "rows": 1328,
+    "unique_targets": 1242
+  },
+  "ps2": {
+    "path": "R:\\Codex-workspace-misc\\gta-vcs\\script_vm_matcher\\artifacts\\semantic_inputs\\vcs_ps2_common_handlers.tsv",
+    "rows": 1328,
+    "unique_targets": 1242
+  }
+}

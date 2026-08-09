@@ -1,0 +1,79 @@
+{
+  "schema": 1,
+  "generated_at": "2026-08-09T12:56:11+00:00",
+  "repositories": [
+    {
+      "repository": "bfbb",
+      "path": "R:\\Codex-workspace-misc\\gta-vcs\\research_feed\\external\\bfbb",
+      "commit": "24d388c4d4f96c12efa339765a3f0afd31bdb0bf",
+      "files_scanned": 304,
+      "rw_symbols": 921,
+      "flirt_assets": 0
+    },
+    {
+      "repository": "CheatDeviceRemastered",
+      "path": "R:\\Codex-workspace-misc\\gta-vcs\\research_feed\\external\\CheatDeviceRemastered",
+      "commit": "f90f67747977c00906c5356e28099d60ed3fb221",
+      "files_scanned": 24,
+      "rw_symbols": 0,
+      "flirt_assets": 0
+    },
+    {
+      "repository": "GTALCS.GTAVCS.PCSX2F.CLEO",
+      "path": "R:\\Codex-workspace-misc\\gta-vcs\\research_feed\\external\\GTALCS.GTAVCS.PCSX2F.CLEO",
+      "commit": "fc1739ad812c73278c01478e0cd03a68330417f6",
+      "files_scanned": 64,
+      "rw_symbols": 0,
+      "flirt_assets": 0
+    },
+    {
+      "repository": "GTALCS.GTAVCS.PSP.CLEO",
+      "path": "R:\\Codex-workspace-misc\\gta-vcs\\research_feed\\external\\GTALCS.GTAVCS.PSP.CLEO",
+      "commit": "c131fe1af498d06007712fb67763b93760bf17d8",
+      "files_scanned": 2138,
+      "rw_symbols": 2,
+      "flirt_assets": 0
+    },
+    {
+      "repository": "librw",
+      "path": "R:\\Codex-workspace-misc\\gta-vcs\\research_feed\\external\\librw",
+      "commit": "0a7eb48ce3ffee7c189780b09b8a6e0e998d399f",
+      "files_scanned": 179,
+      "rw_symbols": 4,
+      "flirt_assets": 0
+    },
+    {
+      "repository": "plugin-sdk",
+      "path": "R:\\Codex-workspace-misc\\gta-vcs\\research_feed\\external\\plugin-sdk",
+      "commit": "0cfee7cb32f5a8608fc7ca181cdb39fd7e1d91e4",
+      "files_scanned": 2349,
+      "rw_symbols": 3618,
+      "flirt_assets": 0
+    },
+    {
+      "repository": "ppsspp",
+      "path": "R:\\Codex-workspace-misc\\gta-vcs\\research_feed\\external\\ppsspp",
+      "commit": "b67667cbd1c33e3fc6dfb4b90fdd3a87f7f95718",
+      "files_scanned": 194,
+      "rw_symbols": 3,
+      "flirt_assets": 0
+    },
+    {
+      "repository": "renderware3-flirt",
+      "path": "R:\\Codex-workspace-misc\\gta-vcs\\research_feed\\external\\renderware3-flirt",
+      "commit": "39a0c4ccdebb45a8a3a7385c09cbd8a042551929",
+      "files_scanned": 1,
+      "rw_symbols": 0,
+      "flirt_assets": 599
+    },
+    {
+      "repository": "sannybuilder-library",
+      "path": "R:\\Codex-workspace-misc\\gta-vcs\\research_feed\\external\\sannybuilder-library",
+      "commit": "d6fca540edbc8909d422b982b39c1c7cdc35daaf",
+      "files_scanned": 2698,
+      "rw_symbols": 2,
+      "flirt_assets": 0
+    }
+  ],
+  "policy": "Public sources only; no game executable, PDB or MAP download."
+}

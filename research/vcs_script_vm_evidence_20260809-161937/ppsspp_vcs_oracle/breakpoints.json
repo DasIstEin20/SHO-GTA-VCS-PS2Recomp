@@ -1,0 +1,116 @@
+{
+  "schema": "ppsspp-vcs-oracle/v1",
+  "purpose": "Read-only runtime proof configuration for the VCS PSP Script VM. All RVAs are relative to GTA_VCS_Debug_EBOOT.ELF image base 0.",
+  "elf": "../../decrypted_eboot/GTA_VCS_Debug_EBOOT.ELF",
+  "runtime_load_base": "auto_by_dispatcher_signature",
+  "dispatcher": {
+    "rva": "0x0005E5E8",
+    "signature_hex": "f0ffbd270800bfaf248e858f1000868c",
+    "opcode_ready_rva_offset": "0x20",
+    "opcode_register": "a1",
+    "script_space_pointer_gp_offset": "-0x71DC",
+    "handler_table_rva": "0x00380AB0",
+    "handler_record_size": 8
+  },
+  "thread": {
+    "snapshot_size": "0x220",
+    "known_fields": {
+      "ip": "0x10",
+      "saved_ip": "0x14",
+      "call_frame_data": "0x1FC",
+      "wake_time": "0x200",
+      "call_stack_depth": "0x204",
+      "condition_state": "0x206",
+      "condition_result": "0x209",
+      "wait_flag": "0x20B",
+      "not_flag": "0x20C"
+    }
+  },
+  "capture": {
+    "opcode_window_bytes": 32,
+    "max_dispatches": 5000,
+    "resume_after_capture": true,
+    "memory_write_tracepoints": true,
+    "watch_regions": []
+  },
+  "proof_cases": [
+    {
+      "opcode": "0x0000",
+      "name": "NOP",
+      "static_handler_rva": "0x002B73E0",
+      "expected_vm_dispatch_status": 0,
+      "script_flow": "CONTINUE",
+      "script_contract": {
+        "inputs": [],
+        "outputs": [],
+        "side_effects": []
+      },
+      "static_expected_thread_fields": []
+    },
+    {
+      "opcode": "0x0001",
+      "name": "WAIT",
+      "static_handler_rva": "0x0029A5A8",
+      "expected_vm_dispatch_status": 1,
+      "script_flow": "YIELD",
+      "script_contract": {
+        "inputs": ["one encoded delay parameter"],
+        "outputs": [],
+        "side_effects": ["wake_time"]
+      },
+      "static_expected_thread_fields": ["wake_time", "wait_flag"]
+    },
+    {
+      "opcode": "0x0002",
+      "name": "GOTO",
+      "static_handler_rva": "0x002B73E8",
+      "expected_vm_dispatch_status": 0,
+      "script_flow": "CONTINUE",
+      "script_contract": {
+        "inputs": ["one encoded script-position parameter"],
+        "outputs": [],
+        "side_effects": ["script_ip"]
+      },
+      "static_expected_thread_fields": ["ip"]
+    },
+    {
+      "opcode": "0x037A",
+      "name": "CALL_NOT",
+      "static_handler_rva": "0x002B8714",
+      "expected_vm_dispatch_status": 0,
+      "script_flow": "CONTINUE",
+      "script_contract": {
+        "inputs": ["call metadata and arguments"],
+        "outputs": [],
+        "side_effects": ["call_frame_data", "call_stack_depth", "script_ip"]
+      },
+      "static_expected_thread_fields": ["call_frame_data", "call_stack_depth"]
+    },
+    {
+      "opcode": "0x037B",
+      "name": "CALL",
+      "static_handler_rva": "0x002B8714",
+      "expected_vm_dispatch_status": 0,
+      "script_flow": "CONTINUE",
+      "script_contract": {
+        "inputs": ["call metadata and arguments"],
+        "outputs": [],
+        "side_effects": ["call_frame_data", "call_stack_depth", "script_ip"]
+      },
+      "static_expected_thread_fields": ["call_frame_data", "call_stack_depth"]
+    },
+    {
+      "opcode": "0x055A",
+      "name": "OPCODE_055A",
+      "static_handler_rva": "0x0009E4C8",
+      "expected_vm_dispatch_status": 0,
+      "script_flow": "CONTINUE",
+      "script_contract": {
+        "inputs": [],
+        "outputs": [],
+        "side_effects": ["condition_state", "condition_result"]
+      },
+      "static_expected_thread_fields": ["condition_state", "condition_result"]
+    }
+  ]
+}

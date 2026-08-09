@@ -1,0 +1,10 @@
+REVIEW-ONLY instruction window @ 0x0005e3d0
+Program: GTA_VCS_Debug_EBOOT.ELF
+
+0x0005e3d0  addiu sp,sp,-0x10  ; flow=FALL_THROUGH
+0x0005e3d4  sw ra,0x0(sp)  ; flow=FALL_THROUGH
+0x0005e3d8  jal 0x0005da7c  ; flow=UNCONDITIONAL_CALL
+0x0005e3dc  _nop  ; flow=FALL_THROUGH
+0x0005e3e0  lw ra,0x0(sp)  ; flow=FALL_THROUGH
+0x0005e3e4  jr ra  ; flow=TERMINATOR
+0x0005e3e8  _addiu sp,sp,0x10  ; flow=FALL_THROUGH

@@ -1,0 +1,164 @@
+{
+  "schema": 1,
+  "generated_at": "2026-08-09T12:56:12+00:00",
+  "status": "MANUAL_CONFIRMATION_PRESENT",
+  "confirmed": [
+    {
+      "symbol": "CRunningScript::ProcessOneCommand",
+      "vcs_psp": {
+        "address": "0x0005e5e8",
+        "name": "FUN_0005e5e8",
+        "namespace": "Global",
+        "size": 216,
+        "instructions": 54,
+        "basic_blocks": 10,
+        "pcode_count": 152,
+        "call_ops": 1,
+        "branch_ops": 7,
+        "cbranch_ops": 4,
+        "load_ops": 14,
+        "store_ops": 7,
+        "pcode": {
+          "COPY": 47,
+          "INT_ADD": 34,
+          "LOAD": 14,
+          "INT_AND": 8,
+          "INT_LEFT": 7,
+          "STORE": 7,
+          "CBRANCH": 4,
+          "INT_SEXT": 4,
+          "BRANCH": 3,
+          "INT_2COMP": 3,
+          "INT_EQUAL": 3,
+          "INT_NOTEQUAL": 3,
+          "INT_OR": 3,
+          "INT_SRIGHT": 3,
+          "CALLOTHER": 2,
+          "CALLIND": 1,
+          "INT_MULT": 1,
+          "INT_NEGATE": 1,
+          "INT_RIGHT": 1,
+          "INT_SUB": 1,
+          "INT_ZEXT": 1,
+          "RETURN": 1
+        },
+        "constant_buckets": {
+          "b0": 37,
+          "b5": 25,
+          "b2": 13,
+          "b3": 11,
+          "b1": 9,
+          "b6": 6,
+          "b4": 1
+        },
+        "strings": [],
+        "callees": []
+      },
+      "confidence": "CALLGRAPH_CONFIRMED",
+      "evidence": [
+        {
+          "kind": "MULTI_SIGNAL_HIGH",
+          "fact": "reads current Script IP at +0x10 through ScriptSpace base 0xffff3534 and fetches a 16-bit opcode"
+        },
+        {
+          "kind": "CALLGRAPH_CONFIRMED",
+          "fact": "increments IP by two; records NOT from 0x8000; strips with 0x7fff; indexes opcode×8 dispatch records; invokes selected handler"
+        },
+        {
+          "kind": "CALLGRAPH_CONFIRMED",
+          "fact": "CRunningScript::Process at 0x0005e4a4 calls dispatcher repeatedly until returned status is non-zero"
+        },
+        {
+          "kind": "EXACT_DISPATCH_TABLE",
+          "fact": "1328 nonzero records within 1371 VCS opcode slots"
+        },
+        {
+          "kind": "MANUAL_DECOMPILATION_REVIEW",
+          "artifact": "script_vm_matcher\\artifacts\\review\\vcs_psp\\0005e5e8_FUN_0005e5e8.c",
+          "sha256": "19fda48c59b95bb42ec54de73ab1bdc3fcdd101ca8849e253feefb790d0d7b2e"
+        },
+        {
+          "kind": "MANUAL_DECOMPILATION_REVIEW",
+          "artifact": "script_vm_matcher\\artifacts\\review\\vcs_psp\\0005e4a4_FUN_0005e4a4.c",
+          "sha256": "0a16556a6e4d16a0d78556f3f93064f3182a1d449c788bdff7b02c4c30135730"
+        }
+      ],
+      "automatic_rename": false,
+      "dispatch_model": "data-driven descriptor/function-pointer table, not direct page calls",
+      "related_confirmed_function": {
+        "symbol": "CRunningScript::Process",
+        "vcs_psp": {
+          "address": "0x0005e4a4",
+          "name": "FUN_0005e4a4",
+          "namespace": "Global",
+          "size": 324,
+          "instructions": 81,
+          "basic_blocks": 22,
+          "pcode_count": 172,
+          "call_ops": 2,
+          "branch_ops": 14,
+          "cbranch_ops": 13,
+          "load_ops": 14,
+          "store_ops": 8,
+          "pcode": {
+            "COPY": 47,
+            "INT_ADD": 34,
+            "LOAD": 14,
+            "CBRANCH": 13,
+            "INT_OR": 12,
+            "INT_EQUAL": 8,
+            "STORE": 8,
+            "INT_ZEXT": 7,
+            "INT_AND": 6,
+            "INT_LEFT": 6,
+            "INT_NOTEQUAL": 6,
+            "CALL": 2,
+            "INT_SEXT": 2,
+            "BRANCH": 1,
+            "CALLOTHER": 1,
+            "INT_2COMP": 1,
+            "INT_LESS": 1,
+            "INT_SLESS": 1,
+            "INT_SRIGHT": 1,
+            "RETURN": 1
+          },
+          "constant_buckets": {
+            "b0": 56,
+            "b5": 29,
+            "b6": 12,
+            "b3": 11,
+            "b2": 7,
+            "b1": 6,
+            "b4": 5
+          },
+          "strings": [],
+          "callees": [
+            "0x0005e5e8:FUN_0005e5e8",
+            "0x0005ec50:FUN_0005ec50"
+          ]
+        },
+        "confidence": "CALLGRAPH_CONFIRMED"
+      }
+    }
+  ],
+  "propagation": {
+    "file": "vcs_dispatcher_propagation.json",
+    "mode": "opcode × 8 descriptor/function-pointer table",
+    "note": "VCS has indirect table handlers, not direct ProcessCommands page callees."
+  },
+  "policy": {
+    "automatic_rename": [
+      "EXACT_SYMBOL",
+      "NORMALIZED_MIPS_EXACT + independent semantic anchor",
+      "BINDIFF_HIGH + CALLGRAPH_CONFIRMED"
+    ],
+    "never_automatic": [
+      "p-code histogram similarity",
+      "CFG/size similarity",
+      "constant-bucket similarity",
+      "role affinity",
+      "a fuzzy score alone"
+    ],
+    "chain": "reLCS source -> LCS Android exact C++ symbols -> LCS PSP MIPS -> VCS PSP MIPS"
+  }
+}

@@ -1,0 +1,11 @@
+REVIEW-ONLY instruction window @ 0x00000096
+Program: GTA_VCS_Debug_EBOOT.ELF
+
+0x00000098  andi a1,a1,0x1  ; flow=FALL_THROUGH
+0x0000009c  beq a1,zero,0x000000ac  ; flow=CONDITIONAL_JUMP
+0x000000a0  _sw a2,0x4(a0)  ; flow=FALL_THROUGH
+0x000000a4  jal 0x002ba654  ; flow=UNCONDITIONAL_CALL
+0x000000a8  _nop  ; flow=FALL_THROUGH
+0x000000ac  lw ra,0x0(sp)  ; flow=FALL_THROUGH
+0x000000b0  jr ra  ; flow=TERMINATOR
+0x000000b4  _addiu sp,sp,0x10  ; flow=FALL_THROUGH

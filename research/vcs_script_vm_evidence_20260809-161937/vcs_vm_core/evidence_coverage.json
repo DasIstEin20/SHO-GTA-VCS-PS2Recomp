@@ -1,0 +1,596 @@
+{
+  "schema": "vcs-vm-core-coverage/v1",
+  "purpose": "Evidence-gated implementation coverage for the portable VCS Script VM reconstruction.",
+  "namespace": {
+    "first_opcode": "0x0000",
+    "last_opcode": "0x055A",
+    "slot_count": 1371,
+    "fully_implemented_handlers": 59,
+    "adapter_gated_handlers": 28,
+    "unimplemented_handlers": 1284,
+    "unimplemented_policy": "Fault explicitly; never report a false script yield or invent a semantic name."
+  },
+  "dispatcher": {
+    "implementation": "16-bit little-endian fetch; advance IP by 2; store raw high NOT bit; dispatch raw_opcode & 0x7fff.",
+    "status_abi": {
+      "0": "CONTINUE: Process() immediately executes the next opcode.",
+      "1": "WAIT-specific YIELD: stop the current processing pass until wake_time."
+    }
+  },
+  "parameter_abi": {
+    "status": "DECODER_AND_VARIABLE_RESOLVER_IMPLEMENTED",
+    "native_psp_anchors": {
+      "CollectParameters": "0x0006189C",
+      "CollectNextParameterWithoutIncreasingPC": "0x0005E71C",
+      "GetPointerToScriptVariable": "0x0005DA7C",
+      "StoreParameters": "0x0005E890"
+    },
+    "implemented": [
+      "raw int32 decoding for plural-collector tags 0x00..0x0A, including NUL-terminated ScriptSpace string offsets",
+      "VCS tag-0 split: plural collector produces raw zero while standalone CollectNextParameterWithoutIncreasingPC follows its low-variable resolver default",
+      "signed INT8/INT16 forms observed in PSP",
+      "thread-local, local-array, ScriptSpace-global and ScriptSpace-global-array references",
+      "array bound rejection matching the PSP resolver",
+      "output storage through decoded variable destinations"
+    ],
+    "boundary": "The portable plural collector is a semantic loop over the directly confirmed PSP CollectParameters ABI rather than a binary copy of its coprocessor-assisted jump table; the function CALL/RETURN output ABI is separately proved."
+  },
+  "handlers": [
+    {
+      "opcode": "0x0000",
+      "name": "NOP",
+      "status": "IMPLEMENTED",
+      "contract": "No script inputs, outputs or state effects; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x0001",
+      "name": "WAIT",
+      "status": "IMPLEMENTED",
+      "contract": "Read the evidenced immediate integer delay, set wake_time, clear wait_flag, native status 1/YIELD."
+    },
+    {
+      "opcode": "0x0002",
+      "name": "GOTO",
+      "status": "IMPLEMENTED",
+      "contract": "Read the evidenced immediate integer target, update script IP, native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x0004",
+      "name": "SET_VAR_INT",
+      "status": "IMPLEMENTED_PS2_STATIC_PSP_SETUP",
+      "contract": "Resolve destination, collect one raw dword and store it; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x0005",
+      "name": "SET_VAR_FLOAT",
+      "status": "IMPLEMENTED_PS2_STATIC_PSP_SETUP",
+      "contract": "Resolve destination, collect one raw dword and store it unchanged; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x0006",
+      "name": "SET_VAR_TEXT_LABEL",
+      "status": "IMPLEMENTED_PS2_STATIC_PSP_SETUP",
+      "contract": "Resolve destination, collect one raw parameter and store its dword; literal strings remain ScriptSpace offsets in the portable model; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x0007",
+      "name": "ADD_VAL_TO_INT_VAR",
+      "status": "IMPLEMENTED_PS2_STATIC_PSP_SETUP",
+      "contract": "Resolve destination, collect one dword and add modulo 2^32; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x0008",
+      "name": "ADD_VAL_TO_FLOAT_VAR",
+      "status": "IMPLEMENTED",
+      "contract": "Resolve destination, collect one raw binary32 value, add and store the raw binary32 result; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x0009",
+      "name": "SUB_VAL_FROM_INT_VAR",
+      "status": "IMPLEMENTED",
+      "contract": "Resolve destination, collect one dword, subtract modulo 2^32 and store; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x000A",
+      "name": "SUB_VAL_FROM_FLOAT_VAR",
+      "status": "IMPLEMENTED",
+      "contract": "Resolve destination, collect one raw binary32 value, subtract and store the raw binary32 result; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x000B",
+      "name": "MULT_INT_VAR_BY_VAL",
+      "status": "IMPLEMENTED",
+      "contract": "Resolve destination, collect one dword, store the low 32 bits of the product; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x000C",
+      "name": "MULT_FLOAT_VAR_BY_VAL",
+      "status": "IMPLEMENTED",
+      "contract": "Resolve destination, collect one raw binary32 value, multiply and store the raw binary32 result; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x000D",
+      "name": "DIV_INT_VAR_BY_VAL",
+      "status": "IMPLEMENTED_WITH_EXPLICIT_NATIVE_DIVIDE_FAULTS",
+      "contract": "Resolve destination, collect one signed dword, divide for normal operands and store; reject zero divisor and INT_MIN/-1 instead of inventing a native edge quotient; native status 0/CONTINUE otherwise."
+    },
+    {
+      "opcode": "0x000E",
+      "name": "DIV_FLOAT_VAR_BY_VAL",
+      "status": "IMPLEMENTED",
+      "contract": "Resolve destination, collect one raw binary32 value, divide and store the raw binary32 result; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x000F",
+      "name": "IS_INT_VAR_GREATER_THAN_NUMBER",
+      "status": "IMPLEMENTED",
+      "contract": "Collect two signed int32 parameters, reduce param[0] > param[1] through raw NOT and the exact condition VM; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x0010",
+      "name": "IS_NUMBER_GREATER_THAN_INT_VAR",
+      "status": "IMPLEMENTED",
+      "contract": "Collect two signed int32 parameters, reduce param[0] > param[1] through raw NOT and the exact condition VM; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x0011",
+      "name": "IS_INT_VAR_GREATER_THAN_INT_VAR",
+      "status": "IMPLEMENTED",
+      "contract": "Collect two signed int32 parameters, reduce param[0] > param[1] through raw NOT and the exact condition VM; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x0012",
+      "name": "IS_FLOAT_VAR_GREATER_THAN_NUMBER",
+      "status": "IMPLEMENTED",
+      "contract": "Collect two raw binary32 parameters, reduce !(param[0] <= param[1]) through raw NOT and the exact condition VM; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x0013",
+      "name": "IS_NUMBER_GREATER_THAN_FLOAT_VAR",
+      "status": "IMPLEMENTED",
+      "contract": "Collect two raw binary32 parameters, reduce !(param[0] <= param[1]) through raw NOT and the exact condition VM; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x0014",
+      "name": "IS_FLOAT_VAR_GREATER_THAN_FLOAT_VAR",
+      "status": "IMPLEMENTED",
+      "contract": "Collect two raw binary32 parameters, reduce !(param[0] <= param[1]) through raw NOT and the exact condition VM; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x0015",
+      "name": "IS_INT_VAR_GREATER_OR_EQUAL_TO_NUMBER",
+      "status": "IMPLEMENTED",
+      "contract": "Collect two signed int32 parameters, reduce param[0] >= param[1] through raw NOT and the exact condition VM; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x0016",
+      "name": "IS_NUMBER_GREATER_OR_EQUAL_TO_INT_VAR",
+      "status": "IMPLEMENTED",
+      "contract": "Collect two signed int32 parameters, reduce param[0] >= param[1] through raw NOT and the exact condition VM; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x0017",
+      "name": "IS_INT_VAR_GREATER_OR_EQUAL_TO_INT_VAR",
+      "status": "IMPLEMENTED",
+      "contract": "Collect two signed int32 parameters, reduce param[0] >= param[1] through raw NOT and the exact condition VM; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x0018",
+      "name": "IS_FLOAT_VAR_GREATER_OR_EQUAL_TO_NUMBER",
+      "status": "IMPLEMENTED",
+      "contract": "Collect two raw binary32 parameters, reduce !(param[0] < param[1]) through raw NOT and the exact condition VM; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x0019",
+      "name": "IS_NUMBER_GREATER_OR_EQUAL_TO_FLOAT_VAR",
+      "status": "IMPLEMENTED",
+      "contract": "Collect two raw binary32 parameters, reduce !(param[0] < param[1]) through raw NOT and the exact condition VM; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x001A",
+      "name": "IS_FLOAT_VAR_GREATER_OR_EQUAL_TO_FLOAT_VAR",
+      "status": "IMPLEMENTED",
+      "contract": "Collect two raw binary32 parameters, reduce !(param[0] < param[1]) through raw NOT and the exact condition VM; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x001B",
+      "name": "IS_INT_VAR_EQUAL_TO_NUMBER",
+      "status": "IMPLEMENTED",
+      "contract": "Collect two signed int32 parameters, reduce param[0] == param[1] through raw NOT and the exact condition VM; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x001C",
+      "name": "IS_INT_VAR_EQUAL_TO_INT_VAR",
+      "status": "IMPLEMENTED",
+      "contract": "Collect two signed int32 parameters, reduce param[0] == param[1] through raw NOT and the exact condition VM; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x001D",
+      "name": "IS_FLOAT_VAR_EQUAL_TO_NUMBER",
+      "status": "IMPLEMENTED",
+      "contract": "Collect two raw dword parameters, reduce bitwise equality through raw NOT and the exact condition VM; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x001E",
+      "name": "IS_FLOAT_VAR_EQUAL_TO_FLOAT_VAR",
+      "status": "IMPLEMENTED",
+      "contract": "Collect two raw dword parameters, reduce bitwise equality through raw NOT and the exact condition VM; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x0022",
+      "name": "GOTO_IF_FALSE",
+      "status": "IMPLEMENTED_PS2_STATIC_PSP_COLLECTOR_ENTRY",
+      "contract": "Read one script target; update IP only when condition_result is false; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x0031",
+      "name": "ADD_TIMED_VAL_TO_FLOAT_VAR",
+      "status": "IMPLEMENTED_ADAPTER_REQUIRED",
+      "contract": "Resolve destination, collect one raw binary32 parameter, multiply by host-provided engine time step, add and store raw result bits; native status 0/CONTINUE. Missing time-step provider faults explicitly. Exact shared target with 0032 on PSP and PS2."
+    },
+    {
+      "opcode": "0x0032",
+      "name": "ADD_TIMED_FLOAT_VAR_TO_FLOAT_VAR",
+      "status": "IMPLEMENTED_ADAPTER_REQUIRED_SHARED_TARGET",
+      "contract": "Exact PSP/PS2 dispatch alias of 0031: resolve destination, collect one raw binary32 parameter, add parameter * host time step and store; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x0033",
+      "name": "SUB_TIMED_VAL_FROM_FLOAT_VAR",
+      "status": "IMPLEMENTED_ADAPTER_REQUIRED",
+      "contract": "Resolve destination, collect one raw binary32 parameter, multiply by host-provided engine time step, subtract and store raw result bits; native status 0/CONTINUE. Missing time-step provider faults explicitly. Exact shared target with 0034 on PSP and PS2."
+    },
+    {
+      "opcode": "0x0034",
+      "name": "SUB_TIMED_FLOAT_VAR_FROM_FLOAT_VAR",
+      "status": "IMPLEMENTED_ADAPTER_REQUIRED_SHARED_TARGET",
+      "contract": "Exact PSP/PS2 dispatch alias of 0033: resolve destination, collect one raw binary32 parameter, subtract parameter * host time step and store; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x0035",
+      "name": "SET_VAR_INT_TO_VAR_INT",
+      "status": "IMPLEMENTED_PS2_STATIC_PSP_SETUP",
+      "contract": "Resolve destination, collect one raw dword and store it; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x0036",
+      "name": "SET_VAR_FLOAT_TO_VAR_FLOAT",
+      "status": "IMPLEMENTED_PS2_STATIC_PSP_SETUP",
+      "contract": "Resolve destination, collect one raw dword and store it unchanged; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x0037",
+      "name": "SET_VAR_TEXT_LABEL_TO_VAR_TEXT_LABEL",
+      "status": "IMPLEMENTED_CONFIRMED_SHARED_TARGET",
+      "contract": "Exact PSP/PS2 dispatch alias of 0006: resolve destination, collect one raw dword and store it; native status 0/CONTINUE. No host string-pointer ABI is asserted."
+    },
+    {
+      "opcode": "0x0038",
+      "name": "CSET_VAR_INT_TO_VAR_FLOAT",
+      "status": "IMPLEMENTED_WITH_EXPLICIT_FPU_INVALID_FAULT",
+      "contract": "Resolve destination and source variables; truncate source binary32 toward zero into destination int32; fault for NaN/infinity/out-of-range rather than invent a native FPU-invalid payload; native status 0/CONTINUE otherwise."
+    },
+    {
+      "opcode": "0x0039",
+      "name": "CSET_VAR_FLOAT_TO_VAR_INT",
+      "status": "IMPLEMENTED",
+      "contract": "Resolve destination and source variables; convert int32 to binary32 and store raw result bits; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x003A",
+      "name": "ABS_INT",
+      "status": "IMPLEMENTED",
+      "contract": "Resolve one int32 variable, conditional modulo-2^32 negate; INT_MIN remains INT_MIN; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x003B",
+      "name": "ABS_FLOAT",
+      "status": "IMPLEMENTED",
+      "contract": "Resolve one binary32 variable and negate only on strict < +0; -0 and NaN are preserved; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x0024",
+      "name": "START_NEW_SCRIPT",
+      "status": "IMPLEMENTED_ADAPTER_REQUIRED",
+      "contract": "Read one script index, clamp negative to zero, request a host-owned child thread, then decode and copy exactly 96 raw local dwords at child local slot zero; native status 0/CONTINUE. Missing/null host adapter faults explicitly."
+    },
+    {
+      "opcode": "0x0025",
+      "name": "GOSUB",
+      "status": "IMPLEMENTED",
+      "contract": "Collect one target parameter, push tagless post-parameter return IP at call depth, transfer to the evidenced script target convention, native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x0026",
+      "name": "RETURN",
+      "status": "IMPLEMENTED_FOR_CONFIRMED_GOSUB_AND_FUNCTION_FRAMES",
+      "contract": "Pop any frame. Tagless GOSUB frame restores its post-parameter return IP; CALL/CALL_NOT frames copy outputs from locals[LP + input_count], restore LP, StoreParameters into caller destinations and CALL_NOT flips condition_result; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x0029",
+      "name": "ADD_INT_VAR_TO_INT_VAR",
+      "status": "IMPLEMENTED_PS2_STATIC_PSP_SETUP",
+      "contract": "Resolve destination, collect one dword and add modulo 2^32; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x002A",
+      "name": "ARITHMETIC_DISPATCH_ALIAS_FLOAT_ADD",
+      "status": "IMPLEMENTED_CONFIRMED_SHARED_TARGET",
+      "contract": "Exact dispatch alias of 0008 on PSP and PS2: resolve destination, collect binary32, add, raw-result store; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x002B",
+      "name": "ARITHMETIC_DISPATCH_ALIAS_INTEGER_SUBTRACT",
+      "status": "IMPLEMENTED_CONFIRMED_SHARED_TARGET",
+      "contract": "Exact dispatch alias of 0009 on PSP and PS2: resolve destination, subtract modulo 2^32, store; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x002C",
+      "name": "ARITHMETIC_DISPATCH_ALIAS_FLOAT_SUBTRACT",
+      "status": "IMPLEMENTED_CONFIRMED_SHARED_TARGET",
+      "contract": "Exact dispatch alias of 000A on PSP and PS2: resolve destination, collect binary32, subtract, raw-result store; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x002D",
+      "name": "ARITHMETIC_DISPATCH_ALIAS_INTEGER_MULTIPLY",
+      "status": "IMPLEMENTED_CONFIRMED_SHARED_TARGET",
+      "contract": "Exact dispatch alias of 000B on PSP and PS2: resolve destination, store low 32 product bits; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x002E",
+      "name": "ARITHMETIC_DISPATCH_ALIAS_FLOAT_MULTIPLY",
+      "status": "IMPLEMENTED_CONFIRMED_SHARED_TARGET",
+      "contract": "Exact dispatch alias of 000C on PSP and PS2: resolve destination, collect binary32, multiply, raw-result store; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x002F",
+      "name": "ARITHMETIC_DISPATCH_ALIAS_INTEGER_DIVIDE",
+      "status": "IMPLEMENTED_CONFIRMED_SHARED_TARGET_WITH_EXPLICIT_NATIVE_DIVIDE_FAULTS",
+      "contract": "Exact dispatch alias of 000D on PSP and PS2: normal signed division then store; reject zero divisor and INT_MIN/-1 rather than inventing a native edge quotient; native status 0/CONTINUE otherwise."
+    },
+    {
+      "opcode": "0x0030",
+      "name": "ARITHMETIC_DISPATCH_ALIAS_FLOAT_DIVIDE",
+      "status": "IMPLEMENTED_CONFIRMED_SHARED_TARGET",
+      "contract": "Exact dispatch alias of 000E on PSP and PS2: resolve destination, collect binary32, divide, raw-result store; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x0045",
+      "name": "IS_CHAR_STILL_ALIVE",
+      "status": "IMPLEMENTED_ADAPTER_REQUIRED",
+      "contract": "Collect one character handle, obtain an engine-owned liveness predicate from the host, apply raw NOT and the exact shared condition reducer; native status 0/CONTINUE. Missing probe faults explicitly."
+    },
+    {
+      "opcode": "0x0044",
+      "name": "CHARACTER_COORDINATE_PLACEMENT_BRIDGE",
+      "status": "IMPLEMENTED_ADAPTER_REQUIRED",
+      "contract": "Collect exactly one character handle plus three raw binary32 coordinate payloads. z == -100.0f or z <= -250.0f requests native ground-height resolution before the host placement path; otherwise pass raw coordinates directly. Native status 0/CONTINUE. Missing adapter faults explicitly."
+    },
+    {
+      "opcode": "0x0049",
+      "name": "VEHICLE_DELETE_BRIDGE",
+      "status": "IMPLEMENTED_ADAPTER_REQUIRED",
+      "contract": "Collect exactly one raw vehicle handle and forward it plus the observed native +0x20A context flag to the host vehicle-delete adapter; pool lookup, conditional cleanup-list removal, entity/reference removal and lifetime remain host-owned; native status 0/CONTINUE. Missing adapter faults explicitly."
+    },
+    {
+      "opcode": "0x005E",
+      "name": "RETURN_TRUE",
+      "status": "IMPLEMENTED",
+      "contract": "Apply exact condition reducer with base true, then execute the proved tagless/function RETURN core; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x0059",
+      "name": "CLEAR_PRINTS_BRIDGE",
+      "status": "IMPLEMENTED_ADAPTER_REQUIRED",
+      "contract": "Consume no SCM parameters, invoke the host native-print/UI clear path once and return native status 0/CONTINUE. Missing adapter faults explicitly."
+    },
+    {
+      "opcode": "0x005F",
+      "name": "RETURN_FALSE",
+      "status": "IMPLEMENTED",
+      "contract": "Apply exact condition reducer with base false, then execute the proved tagless/function RETURN core; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x0078",
+      "name": "IF",
+      "status": "IMPLEMENTED",
+      "contract": "Read one count, truncate to uint16 condition_state and for nonzero count seed result true for <9 / false for >=9; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x0079",
+      "name": "LAUNCH_MISSION",
+      "status": "IMPLEMENTED_ADAPTER_REQUIRED",
+      "contract": "Collect one mission ID, ask the host mission-launch adapter for a target script object, set the portable analogue of the directly observed target +0x20A launch-request byte, and return native status 0/CONTINUE. Missing/null host results fault explicitly."
+    },
+    {
+      "opcode": "0x007F",
+      "name": "IS_BUTTON_PRESSED",
+      "status": "IMPLEMENTED_ADAPTER_REQUIRED",
+      "contract": "Collect two raw parameters, truncate each to uint16 in source order, query a host input predicate, then apply raw NOT and the exact condition reducer. Native status 0/CONTINUE; missing probe faults explicitly."
+    },
+    {
+      "opcode": "0x00C8",
+      "name": "SET_FADING_COLOUR",
+      "status": "IMPLEMENTED_ADAPTER_REQUIRED",
+      "contract": "Collect three dwords, narrow each to low uint8 and invoke host fade-colour adapter; native status 0/CONTINUE. Missing adapter faults explicitly."
+    },
+    {
+      "opcode": "0x00C9",
+      "name": "DO_FADE",
+      "status": "IMPLEMENTED_ADAPTER_REQUIRED",
+      "contract": "Collect two dwords, normalize first <=2 to 0.0f otherwise float*0.001f, sign-narrow second to int16 and invoke host fade-start adapter; native status 0/CONTINUE. Missing adapter faults explicitly."
+    },
+    {
+      "opcode": "0x00CA",
+      "name": "GET_FADING_STATUS",
+      "status": "IMPLEMENTED_ADAPTER_REQUIRED",
+      "contract": "Query host fade-status predicate without SCM parameters, apply raw NOT and exact shared condition reducer; native status 0/CONTINUE. Missing probe faults explicitly."
+    },
+    {
+      "opcode": "0x00A5",
+      "name": "PLAYER_STATE_CODE_TWO_CONDITION",
+      "status": "IMPLEMENTED_ADAPTER_REQUIRED",
+      "contract": "Collect one raw player selector, query host predicate for the recovered native player state byte == 2, apply raw NOT and the exact shared condition reducer; native status 0/CONTINUE. Missing probe faults explicitly."
+    },
+    {
+      "opcode": "0x009F",
+      "name": "CHARACTER_DEAD_CONDITION",
+      "status": "IMPLEMENTED_ADAPTER_REQUIRED",
+      "contract": "Collect one raw character handle, query the host for the directly recovered multi-branch native dead-state predicate, apply raw NOT and the exact shared condition reducer; native status 0/CONTINUE. Missing probe faults explicitly."
+    },
+    {
+      "opcode": "0x010E",
+      "name": "GET_GAME_TIMER",
+      "status": "IMPLEMENTED",
+      "contract": "Copy injected game-clock raw dword into the one StoreParameters output destination; native status 0/CONTINUE. This is an output write, not an opcode return value."
+    },
+    {
+      "opcode": "0x0107",
+      "name": "PLAYER_CONTROL_BRIDGE",
+      "status": "IMPLEMENTED_ADAPTER_REQUIRED",
+      "contract": "Collect exactly two raw dwords, forward parameter 0 as the player-table selector and normalize parameter 1 by zero/non-zero into the host player-control adapter; native status 0/CONTINUE. Player safety, camera and reset branches remain host-owned; missing adapter faults explicitly."
+    },
+    {
+      "opcode": "0x0113",
+      "name": "VEHICLE_RELEASE_MARK_BRIDGE",
+      "status": "IMPLEMENTED_ADAPTER_REQUIRED",
+      "contract": "Collect exactly one raw vehicle handle and forward it plus the observed native +0x20A context flag to the host vehicle-release-mark adapter; pool lookup, release policy and context cleanup remain host-owned; native status 0/CONTINUE. Missing adapter faults explicitly. This is deliberately separate from destructive opcode 0049."
+    },
+    {
+      "opcode": "0x01E7",
+      "name": "SET_UNIQUE_JUMPS_TOTAL",
+      "status": "IMPLEMENTED_ADAPTER_REQUIRED",
+      "contract": "Collect exactly one raw int32, forward it to the host-owned total-unique-jumps aggregate and return native status 0/CONTINUE. Missing host adapter faults explicitly; persistence and presentation remain host-owned."
+    },
+    {
+      "opcode": "0x01F9",
+      "name": "CREATE_PICKUP_WITH_AMMO",
+      "status": "IMPLEMENTED_ADAPTER_REQUIRED",
+      "contract": "Collect exactly six values: model-object selector, pickup type (native low byte), ammo and x/y/z binary32. Apply the same negative-model and ground-Z rule as 013F, invoke the same host pickup constructor with ammo, then StoreParameters(1) for its handle; native status 0/CONTINUE. Missing host stages fault explicitly."
+    },
+    {
+      "opcode": "0x013F",
+      "name": "CREATE_PICKUP",
+      "status": "IMPLEMENTED_ADAPTER_REQUIRED",
+      "contract": "Collect exactly five values: model-object selector, pickup type (native low byte), x/y/z binary32. A negative model selector is resolved through a host-owned model-object table. For z == -100.0f or z <= -250.0f, query ground height then add native +0.5f. Invoke the host pickup constructor and StoreParameters(1) for its handle; native status 0/CONTINUE. Missing host stages fault explicitly."
+    },
+    {
+      "opcode": "0x01BA",
+      "name": "GOSUB_FILE",
+      "status": "IMPLEMENTED",
+      "contract": "Collect exactly two raw parameters, push a tagless post-parameter return IP, transfer through parameter[0] with the proved script-target convention and return native status 0/CONTINUE. Parameter[1] is consumed but unobserved by the native handler; no file-loader meaning is claimed."
+    },
+    {
+      "opcode": "0x0023",
+      "name": "TERMINATE_THIS_SCRIPT",
+      "status": "IMPLEMENTED_ADAPTER_REQUIRED",
+      "contract": "No SCM parameters. Host performs the proven active-to-idle scheduler transfer and, for native +0x217-marked threads, clears the mission-running state. Core clears portable active state, marks the thread terminated and returns native status 1/YIELD. Missing adapter faults explicitly."
+    },
+    {
+      "opcode": "0x0203",
+      "name": "DISPLAY_TEXT",
+      "status": "IMPLEMENTED_ADAPTER_REQUIRED",
+      "contract": "Collect two raw binary32 coordinate payloads, then separately collect one raw text-key/offset payload and invoke the host display-text adapter; native status 0/CONTINUE. Text lookup, bounded UTF-16 queue and rendering remain host-owned; missing adapter faults explicitly."
+    },
+    {
+      "opcode": "0x0238",
+      "name": "SCRIPT_NAME",
+      "status": "IMPLEMENTED",
+      "contract": "Read one pointer-like ScriptSpace string source, copy exactly eight bytes with native strncpy semantics into the ScriptThread name field, lowercase only ASCII A..Z in all eight positions, native status 0/CONTINUE. Invalid portable sources fault explicitly."
+    },
+    {
+      "opcode": "0x0268",
+      "name": "CLEAR_HELP",
+      "status": "IMPLEMENTED_ADAPTER_REQUIRED",
+      "contract": "Consume no SCM parameters and invoke the host clear-help adapter once for the native two-path help/HUD clearing sequence; native status 0/CONTINUE. Missing adapter faults explicitly."
+    },
+    {
+      "opcode": "0x0289",
+      "name": "MISSION_STREAM_AND_IMMEDIATE_PROCESS_BOUNDARY",
+      "status": "PROVEN_HOST_SUBSYSTEM_BOUNDARY_EXTERNAL_HOST",
+      "contract": "The core-alone default decodes exactly one raw selector then faults explicitly. The separate VcsMissionHost may override this slot only with the recovered selector remap, offset-table range, scoped source-to-active-buffer copy, idle-to-active factory, post-finalizer target flags, mission-active/parsed-global clear and re-entrant Process(target) sequence. It forwards the first child VM/host fault rather than fabricating a successful mission. It must not be reduced to a generic launch callback."
+    },
+    {
+      "opcode": "0x02DB",
+      "name": "IS_INT_VAR_EQUAL_TO_CONSTANT",
+      "status": "IMPLEMENTED",
+      "contract": "Collect two signed int32 parameters, reduce param[0] == param[1] through raw NOT and the exact condition VM; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x02E2",
+      "name": "SET_VAR_INT_TO_CONSTANT",
+      "status": "IMPLEMENTED_PS2_STATIC_PSP_SETUP",
+      "contract": "Resolve destination, collect one raw dword and store it; native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x0377",
+      "name": "GET_PAD_STATE",
+      "status": "IMPLEMENTED_ADAPTER_REQUIRED",
+      "contract": "Read one raw selector. For unsigned selector 0..44 invoke host pad adapter and StoreParameters its raw result into one output destination; otherwise StoreParameters the selector unchanged. Native status 0/CONTINUE; missing in-range adapter faults explicitly."
+    },
+    {
+      "opcode": "0x037A",
+      "name": "CALL_NOT",
+      "status": "IMPLEMENTED",
+      "contract": "Decode the observed CALL header/inputs, push frame tag 0x00C00000, transfer IP, native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x037B",
+      "name": "CALL",
+      "status": "IMPLEMENTED",
+      "contract": "Decode the observed CALL header/inputs, push frame tag 0x00800000, transfer IP, native status 0/CONTINUE."
+    },
+    {
+      "opcode": "0x0401",
+      "name": "DISABLE_PAUSE_MENU",
+      "status": "IMPLEMENTED_ADAPTER_REQUIRED",
+      "contract": "Collect one raw dword, reduce it to zero/non-zero and invoke the host pause-menu toggle adapter with false/true; native status 0/CONTINUE. Missing adapter faults explicitly."
+    },
+    {
+      "opcode": "0x04F2",
+      "name": "IS_THIS_SCRIPT_A_MISSION",
+      "status": "IMPLEMENTED",
+      "contract": "Read the portable semantic analogue of active ScriptThread native byte +0x217, apply raw NOT and the exact condition reducer, native status 0/CONTINUE. No SCM parameters or host adapter."
+    },
+    {
+      "opcode": "0x04E5",
+      "name": "GLOBAL_BYTE_STORE_BRIDGE",
+      "status": "IMPLEMENTED_ADAPTER_REQUIRED",
+      "contract": "Collect exactly two raw dwords, forward parameter 0 as the engine-global byte-region offset and the low uint8 of parameter 1 to the host global-byte-store adapter; native status 0/CONTINUE. Missing adapter faults explicitly."
+    },
+    {
+      "opcode": "0x055A",
+      "name": "OPCODE_055A",
+      "status": "CONDITION_REDUCER_IMPLEMENTED_HOST_PROBE_REQUIRED",
+      "contract": "Apply base engine predicate XOR raw NOT bit; exact state 0 assignment, states 1..8 AND/decrement and states >=9 OR/decrement/reset semantics; native status 0/CONTINUE. Only the unnamed engine predicate is host-supplied."
+    }
+  ],
+  "evidence": [
+    "../VCS_PSP_INITIAL_OPCODE_CANONICAL_SEMANTICS.json",
+    "../VCS_PSP_PS2_MANUAL_SEMANTIC_PROOF.json",
+    "../reports/VCS_PSP_DISPATCHER_SEMANTIC_PROOF.md",
+    "../reports/VCS_PSP_PARAMETER_ABI_PROOF.md",
+    "../reports/VCS_PSP_CALL_RETURN_ABI_PROOF.md",
+    "../reports/VCS_PSP_GOSUB_RETURN_PROOF.md",
+    "../reports/VCS_PSP_GOSUB_FILE_VM_PROOF.md",
+    "../reports/VCS_PSP_CONDITION_VM_PROOF.md",
+    "../reports/VCS_PSP_INTEGER_CONDITION_VM_PROOF.md",
+    "../reports/VCS_PSP_FLOAT_CONDITION_VM_PROOF.md",
+    "../reports/VCS_PSP_IS_CHAR_STILL_ALIVE_VM_PROOF.md",
+    "../reports/VCS_PSP_FADE_VM_PROOF.md",
+    "../reports/VCS_PSP_GAME_TIMER_VM_PROOF.md",
+    "../reports/VCS_PSP_PAD_STATE_VM_PROOF.md",
+    "../reports/VCS_PSP_LAUNCH_MISSION_VM_PROOF.md",
+    "../reports/VCS_PSP_BUTTON_PRESSED_VM_PROOF.md",
+    "../reports/VCS_PSP_SCRIPT_NAME_VM_PROOF.md",
+    "../reports/VCS_PSP_MAIN_SCM_PREFIX_VERTICAL_SLICE.md",
+    "../reports/VCS_PSP_DISABLE_PAUSE_MENU_VM_PROOF.md",
+    "../reports/VCS_PSP_DISPLAY_TEXT_VM_PROOF.md",
+    "../reports/VCS_PSP_CLEAR_HELP_VM_PROOF.md",
+    "../reports/VCS_PSP_MISSION_THREAD_FLAG_VM_PROOF.md",
+    "../reports/VCS_PSP_CONTROL_FLOW_VM_PROOF.md",
+    "../reports/VCS_PSP_VARIABLE_OPS_PROOF.md",
+    "../reports/VCS_PSP_TIMED_ARITHMETIC_VM_PROOF.md",
+    "../tools/ppsspp_vcs_oracle/telemetry/psp_runtime_vs_ps2_static.json"
+  ]
+}

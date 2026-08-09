@@ -11,6 +11,7 @@
 #include <mutex>
 
 #include "ps2_gif_arbiter.h"
+#include "runtime/ps2_render_boundary.h"
 #if defined(_MSC_VER)
 #include <intrin.h>
 #elif defined(USE_SSE2NEON)
@@ -315,6 +316,14 @@ public:
     void setGifPacketCallback(GifPacketCallback cb) { m_gifPacketCallback = std::move(cb); }
     void setGifArbiter(GifArbiter *arbiter) { m_gifArbiter = arbiter; }
 
+    // Optional passive telemetry.  This is the supported place to correlate
+    // hardware traffic with a future VCS/RenderWare HLE boundary.  The
+    // observer must be thread-safe and must not mutate guest state.
+    void setRenderBoundaryObserver(PS2RenderBoundaryObserver observer)
+    {
+        m_renderBoundaryObserver = std::move(observer);
+    }
+
     using Vu1MscalCallback = std::function<void(uint32_t startPC, uint32_t top, uint32_t itop)>;
     void setVu1MscalCallback(Vu1MscalCallback cb) { m_vu1MscalCallback = std::move(cb); }
     using Vu1MscntCallback = std::function<void(uint32_t top, uint32_t itop)>;
@@ -396,6 +405,7 @@ public:
 
     GifPacketCallback m_gifPacketCallback;
     GifArbiter *m_gifArbiter = nullptr;
+    PS2RenderBoundaryObserver m_renderBoundaryObserver;
     Vu1MscalCallback m_vu1MscalCallback;
     Vu1MscntCallback m_vu1MscntCallback;
 
@@ -437,6 +447,8 @@ public:
     const uint8_t *mapVuMemory(uint32_t physAddr, uint32_t size, uint32_t &offset, uint32_t &limit) const;
     void updateEeTimer0Counter();
     void queueCompletedDmacCause(uint32_t cause);
+    void notifyVif1Microprogram(PS2RenderBoundaryKind kind, uint32_t startPc, uint32_t top, uint32_t itop);
+    void notifyGifPacket(GifPathId pathId, const uint8_t *data, uint32_t sizeBytes, bool path2DirectHl);
     uint64_t m_timer0LastHostNs = 0;
     uint64_t m_timer0FractionNs = 0;
 };

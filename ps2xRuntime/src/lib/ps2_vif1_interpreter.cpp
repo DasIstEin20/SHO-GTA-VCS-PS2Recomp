@@ -384,6 +384,7 @@ void PS2Memory::processVIF1Data(const uint8_t *data, uint32_t sizeBytes)
                 vif1_regs.tops = (vif1_regs.base + vif1_regs.ofst) & 0x3FFu;
             vif1_regs.stat ^= (1u << 7); // toggle DBF
 
+            notifyVif1Microprogram(PS2RenderBoundaryKind::Vif1Mscal, startPC, runTop, runItop);
             if (m_vu1MscalCallback)
                 m_vu1MscalCallback(startPC, runTop, runItop);
             continue;
@@ -402,6 +403,7 @@ void PS2Memory::processVIF1Data(const uint8_t *data, uint32_t sizeBytes)
                 vif1_regs.tops = (vif1_regs.base + vif1_regs.ofst) & 0x3FFu;
             vif1_regs.stat ^= (1u << 7); // toggle DBF
 
+            notifyVif1Microprogram(PS2RenderBoundaryKind::Vif1Mscnt, 0u, runTop, runItop);
             if (m_vu1MscntCallback)
                 m_vu1MscntCallback(runTop, runItop);
             continue;

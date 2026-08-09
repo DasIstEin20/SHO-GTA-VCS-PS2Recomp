@@ -1672,6 +1672,7 @@ void PS2Memory::flushMaskedPath3Packets(bool drainImmediately)
 
     auto emit = [&](const uint8_t *packetData, uint32_t packetSize)
     {
+        notifyGifPacket(GifPathId::Path3, packetData, packetSize, false);
         if (m_gifArbiter)
             m_gifArbiter->submit(GifPathId::Path3, packetData, packetSize, false);
         else if (m_gifPacketCallback)
@@ -1704,6 +1705,7 @@ void PS2Memory::submitGifPacket(GifPathId pathId, const uint8_t *data, uint32_t 
         flushMaskedPath3Packets(false);
     }
 
+    notifyGifPacket(pathId, data, sizeBytes, path2DirectHl);
     if (m_gifArbiter)
         m_gifArbiter->submit(pathId, data, sizeBytes, path2DirectHl);
     else if (m_gifPacketCallback)
@@ -1711,6 +1713,37 @@ void PS2Memory::submitGifPacket(GifPathId pathId, const uint8_t *data, uint32_t 
 
     if (m_gifArbiter && drainImmediately)
         m_gifArbiter->drain();
+}
+
+void PS2Memory::notifyVif1Microprogram(PS2RenderBoundaryKind kind, uint32_t startPc, uint32_t top, uint32_t itop)
+{
+    if (!m_renderBoundaryObserver)
+    {
+        return;
+    }
+    PS2RenderBoundaryEvent event{};
+    event.kind = kind;
+    event.vu1StartPc = startPc;
+    event.vifTop = top;
+    event.vifItop = itop;
+    event.vu1CodeGeneration = getVU1CodeGeneration();
+    event.vu1CodeFingerprint = ps2RenderBoundaryFingerprint(m_vu1Code, PS2_VU1_CODE_SIZE);
+    m_renderBoundaryObserver(event);
+}
+
+void PS2Memory::notifyGifPacket(GifPathId pathId, const uint8_t *data, uint32_t sizeBytes, bool path2DirectHl)
+{
+    if (!m_renderBoundaryObserver)
+    {
+        return;
+    }
+    PS2RenderBoundaryEvent event{};
+    event.kind = PS2RenderBoundaryKind::GifPacket;
+    event.gifPath = static_cast<uint8_t>(pathId);
+    event.path2DirectHl = path2DirectHl;
+    event.packetSizeBytes = sizeBytes;
+    event.packetFingerprint = ps2RenderBoundaryFingerprint(data, sizeBytes);
+    m_renderBoundaryObserver(event);
 }
 
 void PS2Memory::processGIFPacket(uint32_t srcPhysAddr, uint32_t qwCount)

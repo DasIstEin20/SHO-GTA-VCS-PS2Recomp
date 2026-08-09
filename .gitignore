@@ -37,3 +37,6 @@ gta-vcs/*
 !gta-vcs/*.toml
 !gta-vcs/docs/
 !gta-vcs/docs/*.md
+!gta-vcs/docs/*.json
+!gta-vcs/tools/
+!gta-vcs/tools/*.py

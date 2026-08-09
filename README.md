@@ -13,6 +13,29 @@ This fork is specifically tailored and maintained for the static recompilation o
 * **Silent Hill Origins (SHO)**: Configurations and function maps can be found in the `sho/` directory (including `sho.csv`, `config_from_analyzer.toml`, etc.).
 * **Grand Theft Auto: Vice City Stories (GTA VCS)**: Configurations and function maps can be found in the `gta-vcs/` directory (including `gta.csv`, `gta_analyzer.toml`, etc.).
 
+### GTA VCS semantic investigation and Hybrid HLE direction
+
+The VCS configuration now carries a small set of evidence-gated Script VM
+symbols for **SLES_546.22**, including `CRunningScript::Process`,
+`ProcessOneCommand`, `CTheScripts::StartNewScript`, mission-streaming opcode
+`0289`, its scheduler helpers and a restored function boundary at
+`0x003B2B20`. These are direct semantic roles, not fuzzy-match labels.
+
+The investigation independently recovered the shared PSP/PS2 VM dispatch
+pipeline, ScriptThread control fields, parameter ABI, CALL/GOSUB return
+contract, condition reducer and the first real `MAIN.SCM -> 0289 -> mission
+child` route. A portable semantic VM can execute that route and halt honestly
+at the first missing host dependency. Proof limits and the proposed opt-in
+Hybrid Static Recomp/HLE experiment are in
+[`gta-vcs/docs/VCS_SEMANTIC_RECOMPILATION.md`](gta-vcs/docs/VCS_SEMANTIC_RECOMPILATION.md).
+
+This opens a third experimental direction: retain recompiled game logic where
+useful, while replacing only proven platform-heavy boundaries (Script VM,
+filesystem, targeted IOP services, and eventually high-level RenderWare entry
+points) with build-scoped native hosts. No override is enabled automatically;
+every interception must remain opt-in and be validated against the recovered
+semantic oracle.
+
 ### Modules
 
 * `ps2xAnalyzer`: scans ELF/functions and writes TOML config (`stubs`, `skip`, instruction patches).

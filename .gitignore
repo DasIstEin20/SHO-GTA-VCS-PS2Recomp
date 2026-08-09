@@ -35,3 +35,5 @@ sho/*
 gta-vcs/*
 !gta-vcs/*.csv
 !gta-vcs/*.toml
+!gta-vcs/docs/
+!gta-vcs/docs/*.md

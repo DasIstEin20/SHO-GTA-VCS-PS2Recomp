@@ -15,11 +15,18 @@ This fork is specifically tailored and maintained for the static recompilation o
 
 ### GTA VCS semantic investigation and Hybrid HLE direction
 
-The VCS configuration now carries a small set of evidence-gated Script VM
-symbols for **SLES_546.22**, including `CRunningScript::Process`,
+The VCS configuration now carries evidence-gated Script VM symbols for
+**SLES_546.22**, including `CRunningScript::Process`,
 `ProcessOneCommand`, `CTheScripts::StartNewScript`, mission-streaming opcode
 `0289`, its scheduler helpers and a restored function boundary at
 `0x003B2B20`. These are direct semantic roles, not fuzzy-match labels.
+
+It also includes a separately reviewed set of recovered PS2 runtime symbols:
+RenderWare/clump traversal, render-state selection and VIF/VU packet paths,
+bootstrap configuration lookup, lookup-owner/list helpers, directory
+enumeration, and IOP semaphore wrappers. The current inventory, confidence
+level, evidence and HLE guidance are in
+[`gta-vcs/docs/VCS_RECOVERED_SYMBOLS.md`](gta-vcs/docs/VCS_RECOVERED_SYMBOLS.md).
 
 The investigation independently recovered the shared PSP/PS2 VM dispatch
 pipeline, ScriptThread control fields, parameter ABI, CALL/GOSUB return

@@ -85,14 +85,14 @@ build-specific address binding.
 
 ## Current vertical slice and next boundary
 
-A separate C++17 semantic VM prototype can load an original SCM container,
-execute the real main-script route, handle its first `0289` mission transfer,
-create the real mission child and then stop explicitly at the first missing
-host subsystem. On the investigated PS2 layout it reaches selector zero and
-fails loudly at `013F` because the model-object resolver is intentionally
-absent. This is not a fake boot.
+A separate C++17 semantic VM prototype loads the original SCM container and
+executes the main-script/mission scheduler. With diagnostic registries and the
+evidenced model/zone maps, the PSP route passed an 8,192-frame soak with
+15,763,781 commands, 58 active scripts, 6 idle scripts and no fault. This is
+an empty-world compatibility route, not game playability.
 
-The next task is constrained to the smallest real host adapter: prove the
-`013F` model-object resolver, then terrain height and pickup manager only if
-the real route requires them. Continue adding symbols only as a consequence of
-these reached VM/host boundaries.
+The next port boundary is a real reVC/reLCS host implementation for the VM's
+compiled gameplay interface: pool-backed peds/vehicles, wanted state, camera,
+HUD and garages. Symbol work continues where it supports that integration or
+high-frequency unimplemented MAIN.SCM commands; diagnostic registry breadth
+is no longer treated as the final runtime architecture.

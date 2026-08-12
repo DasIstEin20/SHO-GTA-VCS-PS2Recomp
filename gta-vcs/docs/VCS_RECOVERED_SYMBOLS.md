@@ -232,6 +232,15 @@ script ABI into reVC-owned gameplay managers, not substitute game systems.
 | `0x004197D8` | `vcs_Opcode02E1_IsCharInWater` | confirmed binary contract | resolve `CPed` and test bit 40 of its 64-bit flag word at `+0xE8` |
 | `0x00419110` | `vcs_Opcode02C8_IsCharOnAnyBike` | confirmed semantic | resolve the ped's vehicle and require native vehicle-class discriminator `2` |
 | `0x00418788` | `vcs_Opcode02A8_IsCharOnFoot` | confirmed semantic | reject the native occupancy predicate and ped states `0x11`/`0x12` |
+| `0x0012BD80` | `vcs_Opcode041A_RequestModelName` | confirmed semantic | resolve model name, retain owner/script-name metadata and request both `0x16A`/`0x16E` for the special model |
+| `0x001E3188` | `vcs_Opcode02EA_SetAreaVisible` | confirmed semantic | store one raw area selector and rebuild renderer visibility |
+| `0x001E31D0` | `vcs_Opcode0313_SetExtraColours` | confirmed semantic | preserve colour selector and normalize only the fade flag |
+| `0x002D2978` | `vcs_Opcode0094_AddScore` | confirmed semantic | add signed money delta and clamp a negative result to zero |
+| `0x003DDA10` | `vcs_Opcode04CD_SetAreaName` | confirmed semantic | resolve GXT key and select visible/hidden HUD area-name state |
+| `0x004063B0` | `vcs_Opcode0479_CreateUser3DMarker` | confirmed semantic | reuse the generation-tagged script-marker pool with marker type 7 |
+| `0x00406500` | `vcs_Opcode047A_RemoveUser3DMarker` | confirmed semantic | remove a generation-tagged user marker; stale handles are no-ops |
+| `0x00412848` | `vcs_Opcode003F_DeleteChar` | confirmed semantic | delete a valid non-protected ped and conditionally unregister mission cleanup |
+| `0x00419968` | `vcs_Opcode02EE_GetOffsetFromCharInWorldCoords` | confirmed semantic | multiply local xyz by the ped transform, add translation and store world xyz |
 
 These labels were accepted only after direct PS2 decompilation and a paired
 PSP table/handler review. The portable VM exposes engine-owned work through
